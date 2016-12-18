@@ -378,7 +378,8 @@ class TSReader(QThread):
             self.fitEndSignal.emit(results)
 
     def write(self, df, filename):
-        df = df.dropna()
+        # df = df.dropna()
+        df = df.resample('D')
         header = '''# time_unit: %s
 # unit: %s
 # scale: 1
@@ -393,5 +394,7 @@ class TSReader(QThread):
         #     os.remove(filename)
         with open(filename, 'w') as f:
             f.write(header)
-            df.to_csv(f, sep='\t', float_format='%10.4f',
+            # df.to_csv(f, sep='\t', float_format='%10.4f',
+            #           index=True, header=False, date_format='%Y%m%d %H%M%S')
+            df.to_csv(f, sep='\t', float_format='%10.4f', na_rep='nan',
                       index=True, header=False, date_format='%Y%m%d %H%M%S')
