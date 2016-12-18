@@ -1,5 +1,7 @@
 # TSAnalyzer User Manual
 
+[TOC]
+
 ## Introduction
 
 Time series analysis is important in any areas such as finical, astronomy, geophysics and so on. In the geophysics, time series are analyzed to extract the signals caused by geophysics phenomenon. This software is designed to analyze the GNSS coordinates time series and estimated the signals, such as linear, periodical signals. Also, some useful tools are provided for analysis convenience.
