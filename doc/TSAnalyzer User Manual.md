@@ -251,6 +251,8 @@ $$
 y(t_i) = a+ \sum_{i=1}^{n}b_i(t_i-t_0)^i + \sum_{i=1}^{n_p}(c_i \sin (2\pi t_i / p_i) + d_i \cos(2 \pi t_i / p_i)) + \sum_{i=1}^{n_g}(g_i H(t_i - T_{g_j})) + \sum_{i=1}^{n_l}(C_{l_i} + l_i H\ln (1 + \frac{t_i - t_{eq}}{\tau})) + \sum_{i=1}^{n_e}(C_{e_i} + e_i H (1-e^{(-1(t-t_{eq_i}/\tau))})) +v_i
 $$
 
+`* if the math equations cannot be rendered, please refer to the pdf file`
+
 In the equation, $b_i$ is polynomials, if $i=1$ for $b_i$, it is the linear trend, $c_i$ and $d_i$ are harmonic components, the $H$ is a step function and $g_i$ can be used to explain the sudden change event caused the equipments or co-seismic, $C_{l_{i}}$ and $C_{e_{i}}$ terms are stand for logarithmic or exponential function to be fit after an Earthquake. These terms are the accumulated post-seismic motion, C is the co-seismic offset, and τ is the decay time.
 
 This model can be used to estimated polynomials (max order is 10, if zero is selected, it can search for best order), harmonics (users can define the period) as well as step function (including sudden change, post-seismic log or relaxation) at specific times (users pick interactively or input offsets file), detail information is displayed in the picture.
