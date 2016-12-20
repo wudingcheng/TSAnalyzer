@@ -1,3 +1,4 @@
 /paper
 *.pyc
 .idea/
+test.py
