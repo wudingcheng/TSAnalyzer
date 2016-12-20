@@ -19,7 +19,7 @@ We use PyInstaller to package the source codes to standalone software.
 
 Now Only the windows 64 bit software is provided.
 
-The binary software can be found on the [release page](https://github.com/wdc1010/TSAnalyzer/releases). 
+The binary software can be found on the [release page](https://github.com/wudingcheng/TSAnalyzer/releases). 
 
 ## Support and Information
 

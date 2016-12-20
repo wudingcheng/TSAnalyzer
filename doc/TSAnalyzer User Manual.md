@@ -35,7 +35,7 @@ sudo yum install PyQt4
 
 In the root directory, type `python main.py` or double click the `main.pyw` on the Windows in the command prompt and it goes! 
 
-Also, we provide executable software for [win64](https://github.com/wdc1010/TSAnalyzer/releases).
+Also, we provide executable software for [win64](https://github.com/wudingcheng/TSAnalyzer/releases).
 
 ## GUI Instructions
 
@@ -45,7 +45,7 @@ Also, we provide executable software for [win64](https://github.com/wdc1010/TSAn
 
 #### Tool Bar (from left to right)
 
-![](http://ww3.sinaimg.cn/large/7030ad8ejw1faurblms0kj219c0v9qfy.jpg)
+![Main Window Instructions](http://ww3.sinaimg.cn/large/7030ad8ejw1faurblms0kj219c0v9qfy.jpg)
 
 - Home plot view
 - Previous plot view
@@ -90,7 +90,7 @@ The above buttons are common in time domain and spectral domain.  The following 
 
 ### Spectrum Domain Analysis Instructions
 
-![](http://ww1.sinaimg.cn/large/7030ad8ejw1faurc1m30gj20xs0nagty.jpg)
+![Spectrum Instructions](http://ww1.sinaimg.cn/large/7030ad8ejw1faurc1m30gj20xs0nagty.jpg)
 
 #### Tool Bar
 

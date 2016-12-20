@@ -18,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7077">
-              <caret line="348" column="34" lean-forward="false" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
+            <state relative-caret-position="546">
+              <caret line="604" column="85" lean-forward="false" selection-start-line="604" selection-start-column="85" selection-end-line="604" selection-end-column="85" />
               <folding>
                 <element signature="e#18#47#0" expanded="true" />
               </folding>
@@ -30,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TSSpectralThread.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TSThread/TSSpectralThread.py">
+      <file leaf-file-name="main.pyw" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.pyw">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="798">
-              <caret line="41" column="30" lean-forward="false" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -50,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TSReader.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TSReader.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TSModel/TSReader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="383" column="10" lean-forward="true" selection-start-line="383" selection-start-column="10" selection-end-line="383" selection-end-column="10" />
+            <state relative-caret-position="332">
+              <caret line="380" column="8" lean-forward="false" selection-start-line="380" selection-start-column="8" selection-end-line="380" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -151,10 +151,10 @@
         <option value="$PROJECT_DIR$/TSThread/TSSpectralThread.py" />
         <option value="$PROJECT_DIR$/TSWidgets/TSAnalysisBatchDialog.py" />
         <option value="$PROJECT_DIR$/TSWidgets/TSHeaderDialog.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/TSModel/lombscargle/implementations/main.py" />
         <option value="$PROJECT_DIR$/TSModel/TSFit.py" />
         <option value="$PROJECT_DIR$/TSModel/TSReader.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -199,7 +199,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -256,6 +255,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -464,10 +464,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21002638" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20949867" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -494,13 +494,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TSThread/PlotTSThread.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TSModel/TSReader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -904,16 +897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7077">
-          <caret line="348" column="34" lean-forward="false" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
-          <folding>
-            <element signature="e#18#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TSModel/TSFit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2877">
@@ -926,9 +909,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TSModel/TSReader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="383" column="10" lean-forward="true" selection-start-line="383" selection-start-column="10" selection-end-line="383" selection-end-column="10" />
+        <state relative-caret-position="332">
+          <caret line="380" column="8" lean-forward="false" selection-start-line="380" selection-start-column="8" selection-end-line="380" selection-end-column="8" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.pyw">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="604" column="85" lean-forward="false" selection-start-line="604" selection-start-column="85" selection-end-line="604" selection-end-column="85" />
+          <folding>
+            <element signature="e#18#47#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -602,7 +602,7 @@ class MainWindow(QMainWindow, MainWindow):
     @pyqtSlot()
     def on_actionHelp_triggered(self):
         import webbrowser, os
-        webbrowser.open('file://' + os.path.realpath('doc/TSAnalyzer Manual.mht'))
+        webbrowser.open('file://' + os.path.realpath('doc/TSAnalyzer User Manual.html'))
 
 
 def main():

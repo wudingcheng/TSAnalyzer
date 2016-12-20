@@ -1,5 +1,7 @@
 # TSAnalyzer User Manual
 
+[TOC]
+
 ## Introduction
 
 Time series analysis is important in any areas such as finical, astronomy, geophysics and so on. In the geophysics, time series are analyzed to extract the signals caused by geophysics phenomenon. This software is designed to analyze the GNSS coordinates time series and estimated the signals, such as linear, periodical signals. Also, some useful tools are provided for analysis convenience.
@@ -33,7 +35,7 @@ sudo yum install PyQt4
 
 In the root directory, type `python main.py` or double click the `main.pyw` on the Windows in the command prompt and it goes! 
 
-Also, we provide executable software for [win64](https://github.com/wdc1010/TSAnalyzer/releases).
+Also, we provide executable software for [win64](https://github.com/wudingcheng/TSAnalyzer/releases).
 
 ## GUI Instructions
 
@@ -43,7 +45,7 @@ Also, we provide executable software for [win64](https://github.com/wdc1010/TSAn
 
 #### Tool Bar (from left to right)
 
-![](http://ww3.sinaimg.cn/large/7030ad8ejw1faurblms0kj219c0v9qfy.jpg)
+![Main Window Instructions](http://ww3.sinaimg.cn/large/7030ad8ejw1faurblms0kj219c0v9qfy.jpg)
 
 - Home plot view
 - Previous plot view
@@ -88,7 +90,7 @@ The above buttons are common in time domain and spectral domain.  The following 
 
 ### Spectrum Domain Analysis Instructions
 
-![](http://ww1.sinaimg.cn/large/7030ad8ejw1faurc1m30gj20xs0nagty.jpg)
+![Spectrum Instructions](http://ww1.sinaimg.cn/large/7030ad8ejw1faurc1m30gj20xs0nagty.jpg)
 
 #### Tool Bar
 
@@ -250,6 +252,8 @@ Also for plot figures easily, TSAnalyzer provides figure batch tool (menu - batc
 $$
 y(t_i) = a+ \sum_{i=1}^{n}b_i(t_i-t_0)^i + \sum_{i=1}^{n_p}(c_i \sin (2\pi t_i / p_i) + d_i \cos(2 \pi t_i / p_i)) + \sum_{i=1}^{n_g}(g_i H(t_i - T_{g_j})) + \sum_{i=1}^{n_l}(C_{l_i} + l_i H\ln (1 + \frac{t_i - t_{eq}}{\tau})) + \sum_{i=1}^{n_e}(C_{e_i} + e_i H (1-e^{(-1(t-t_{eq_i}/\tau))})) +v_i
 $$
+
+`* if the math equations cannot be rendered, please refer to the pdf file`
 
 In the equation, $b_i$ is polynomials, if $i=1$ for $b_i$, it is the linear trend, $c_i$ and $d_i$ are harmonic components, the $H$ is a step function and $g_i$ can be used to explain the sudden change event caused the equipments or co-seismic, $C_{l_{i}}$ and $C_{e_{i}}$ terms are stand for logarithmic or exponential function to be fit after an Earthquake. These terms are the accumulated post-seismic motion, C is the co-seismic offset, and τ is the decay time.
 
