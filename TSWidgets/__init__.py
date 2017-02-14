@@ -9,6 +9,7 @@ from .LogDialog import Ui_Dialog as LogDialog
 from .NavigationToolBar import NavigationToolbar
 from .TSToolBar import TSToolBar
 from .SPToolBar import SPToolBar
+from .TSSigsegDialog import TSSigsegDialog
 from PyQt4.QtCore import pyqtSignal, QDate
 from PyQt4.QtGui import QDialog, QTextCursor, QFileDialog
 from datetime import datetime

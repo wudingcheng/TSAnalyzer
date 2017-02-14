@@ -31,10 +31,10 @@ VSVersionInfo(
         u'040904b0',
         [StringStruct(u'CompanyName', u'WU Dingcheng, WHIGG'),
         StringStruct(u'ProductName', u'TSAnalyzer'),
-        StringStruct(u'ProductVersion', u'1.0'),
+        StringStruct(u'ProductVersion', u'1.1'),
         StringStruct(u'InternalName', u'TSAnalyzer'),
         StringStruct(u'OriginalFilename', u'TSAnalyzer.exe'),
-        StringStruct(u'FileVersion', u'1.0'),
+        StringStruct(u'FileVersion', u'1.1'),
         StringStruct(u'FileDescription', u'Python GNSS Time Series Analysis and Visualaztion'),
         StringStruct(u'LegalCopyright', u'GPL'),
         StringStruct(u'LegalTrademarks', u'GPL'),])

@@ -38,7 +38,6 @@ class TSSpectralThread(QThread):
             y = df[c].values
             dy = df['%s_sigma' % c].values
             p = LombScargle(t, y, dy).power(frequency)
-            self.ax.hold(True)
             line = self.ax.plot(frequency, p, label=c, picker=3)
             if self.kwargs.get('fit', False):
                 yfit, slope, sigma = self._loglog_fit(frequency, p)
@@ -79,12 +78,10 @@ class TSSpectralThread(QThread):
         #     p = LombScargle(t, y, dy).power(frequency)
         #     ax.plot(frequency, p, label=c, picker=3)
         #     ax.hold(True)
-        func = getattr(self, '_%s' % self._method)
-        func()
-        self.figure.suptitle(self.kwargs.get('title', ''),
-                             fontsize='x-large', fontname='Microsoft Yahei')
-        self.ax.set_xlabel('Frequceny', fontname='Microsoft Yahei')
-        self.ax.set_ylabel('Power', fontname='Microsoft Yahei')
+        getattr(self, '_%s' % self._method)()
+        self.figure.suptitle(self.kwargs.get('title', ''), fontsize='x-large')
+        self.ax.set_xlabel('Frequceny')
+        self.ax.set_ylabel('Power')
         self.figure.tight_layout()
         self.figure.subplots_adjust(hspace=0.1, top=0.95)
         self.ax.legend()

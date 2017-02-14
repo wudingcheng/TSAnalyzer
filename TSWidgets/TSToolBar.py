@@ -156,8 +156,8 @@ class TSToolBar(NavigationToolbar):
             errors = ax.lines
             for c in ax.collections:
                 c.set_visible(flag)
-            errors[0].set_visible(flag)
             errors[1].set_visible(flag)
+            errors[2].set_visible(flag)
         self.canvas.draw()
 
     def range_on_press(self, event):

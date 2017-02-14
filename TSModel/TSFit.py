@@ -2,6 +2,7 @@ from __future__ import division
 
 import numpy as np
 
+
 class TSFit(object):
 
     def __init__(self, t, y, cov=None):
@@ -48,6 +49,7 @@ class TSFit(object):
             temp['full'] = False
             solves = []
             for i in range(1, 11):
+                print i
                 temp['polys'] = i
                 solve = self._ts_fit(**temp)
                 aics.append(solve['aic'])
@@ -55,6 +57,7 @@ class TSFit(object):
                 # todo here
                 # if abs(solve['p'][-2 * len(periods) - 1]) < 0.01:
                 #     break
+            print aics
             ind = aics.index(min(aics))
             kwargs_copy['polys'] = ind + 1
             self.ts_kwargs = kwargs_copy
@@ -117,16 +120,17 @@ class TSFit(object):
 
         A = A.T
         P = cov
-        N = np.dot(np.dot(A.T, P), A)
+        AP = np.dot(A.T, P)
+        N = np.dot(AP, A)
         Q_xx = np.linalg.inv(N)
-        W = np.dot(np.dot(A.T, P), y)
+        W = np.dot(AP, y)
         p = np.dot(Q_xx, W)
         fit = np.dot(A, p)
         v = fit - y
         result = kwargs
         result['p'] = p
         result['v'] = v
-        number = len(kwargs['offsets']) + 2 * len(kwargs['psdecays'])
+        number = len(kwargs.get('offsets', [])) + 2 * len(kwargs.get('psdecays', []))
         if number != 0:
             temp_p = np.copy(p)
             temp_p[:-number] = 0

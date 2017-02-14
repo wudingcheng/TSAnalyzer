@@ -54,10 +54,9 @@ class MainWindow(QMainWindow, MainWindow):
         self.plotTSThread.plotBreaksEnd.connect(self._plot_breaks_end)
         self.spectralThread = TSSpectralThread(self.sp_figure)
         self.tsToolBar = TSToolBar(self.ts_figure.canvas, None)
-
         self.spToolBar = SPToolBar(self.sp_figure.canvas, None)
-        self.toolbar_dicts = {0: self.tsToolBar,
-                              1: self.spToolBar}
+        self.toolbar_dicts = {1: self.tsToolBar,
+                              2: self.spToolBar}
         for widget in (self.tsPlotWidget, self.spPlotWidget):
             widget.figure.subplots_adjust(left=0.1,
                                           right=0.90,
@@ -72,7 +71,23 @@ class MainWindow(QMainWindow, MainWindow):
         self.sp_figure.canvas.draw()
         for index, toolbar in self.toolbar_dicts.iteritems():
             self.addToolBar(toolbar)
-            toolbar.setVisible(index == 0)
+            toolbar.setVisible(index == 1)
+
+        self.sigsegDialog = TSSigsegDialog(parent=self)
+        self.sigsegThread = TSSigsegThread(self.sigsegDialog.figure)
+        self.sigsegThread.sigsegEndSignal.connect(self._sigseg_end)
+        self.sigsegDialog.addOffsetsSignal.connect(self._add_offsets)
+        self.alphaLineEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.betaLineEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.muLineEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.epsLineEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.lamepsLineEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.tolEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.iterEdit.setFixedWidth(self.alphaLineEdit.width())
+        self.toolBox.setItemEnabled(0, False)
+        self.msRadio.setEnabled(False)
+        self.betaWidget.setVisible(False)
+        self.gammaWidget.setVisible(False)
         self._init_style()
         self._init_signals()
 
@@ -99,7 +114,9 @@ class MainWindow(QMainWindow, MainWindow):
         self.deleteOffsetButton.setToolTip("Remove the offsets file")
 
     def _init_signals(self):
+        self.toolBox.currentChanged.connect(self._toolBox_changed)
         self.tabWidget.currentChanged.connect(self._tabWidget_changed)
+
         self.addFilesButton.clicked.connect(self._click_addFilesButton)
         self.filesListWidget.doubleClicked.connect(self._dbclick_listwidget)
         self.prevButton.clicked.connect(
@@ -493,7 +510,14 @@ class MainWindow(QMainWindow, MainWindow):
             self.filesListWidget.setCurrentRow(next_index)
             self._dbclick_listwidget()
 
+    def _toolBox_changed(self, index):
+        self.tabWidget.setCurrentIndex(index - 1)
+
     def _tabWidget_changed(self, index):
+        index += 1
+        self.toolBox.setCurrentIndex(index)
+        # print index
+        # index = 1 if index <= 1 else index
         toolbar = self.toolbar_dicts[index]
         for key, toolbar in self.toolbar_dicts.iteritems():
             toolbar.setVisible(key == index)
@@ -601,8 +625,51 @@ class MainWindow(QMainWindow, MainWindow):
 
     @pyqtSlot()
     def on_actionHelp_triggered(self):
-        import webbrowser, os
+        import webbrowser
+        import os
         webbrowser.open('file://' + os.path.realpath('doc/TSAnalyzer User Manual.html'))
+
+    @pyqtSlot()
+    def on_diffButton_clicked(self):
+        if self.df is None:
+            return
+        df = self.ts_reader.diff(self.df)
+        self.plotTSThread.plot(df, task='ts', cols=self.column_names,
+                               unit=self.unit,)
+
+    @pyqtSlot()
+    def on_cumsumButton_clicked(self):
+        if self.df is None:
+            return
+        df = self.ts_reader.cumsum(self.df)
+        self.plotTSThread.plot(df, task='ts', cols=self.column_names,
+                               unit=self.unit,)
+
+    @pyqtSlot()
+    def on_sigsegButton_clicked(self):
+        # if self.df is None:
+        #     return
+        # self.offsetsThread = TSOffsetsThread()
+        prm = {"alpha": float(self.alphaLineEdit.text()),
+               "beta": float(self.betaLineEdit.text()),
+               "epsilon": float(self.epsLineEdit.text()),
+               "gamma": float(self.gammaLineEdit.text()),
+               "mu_eps": float(self.muLineEdit.text()),
+               "lambda_epsilon": float(self.lamepsLineEdit.text()),
+               'tol': float(self.tolEdit.value()),
+               'mx_iter': int(self.iterEdit.value())}
+        # df = self.df.dropna()
+
+        # self.offsetsThread.render(df.r.values, prm)
+        self.sigsegDialog.show()
+        self.sigsegThread.analysis(self.df.dropna(), self.column_names, prm)
+
+    def _sigseg_end(self, ind):
+        self.sigsegDialog.line = ind
+
+    @pyqtSlot(bool)
+    def on_actionOffsets_triggered(self, flag):
+        self.toolBox.setItemEnabled(0, flag)
 
 
 def main():

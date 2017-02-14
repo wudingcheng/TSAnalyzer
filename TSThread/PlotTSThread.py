@@ -77,25 +77,24 @@ class PlotTSThread(QThread):
         self.figure.clear()
         for i, c in enumerate(cols):
             ax = self.figure.add_subplot(len(cols), 1, 1 + i)
-            ax.hold(True)
-            ax.set_ylabel('%s (%s)' % (c.upper(), self.kwargs['unit']), fontname='Consolas')
+            ax.set_ylabel('%s (%s)' % (c.upper(), self.kwargs['unit']))
             error = ax.errorbar(self.df.index, self.df[c], yerr=self.df['%s_sigma' % c],
-                                fmt='ko', picker=3, markersize=3)
+                                fmt='ko', picker=3, markersize=3, capsize=3)
             errors.append(error)
-            error[1][0].set_visible(self.kwargs.get('errorbar', False))
-            error[1][1].set_visible(self.kwargs.get('errorbar', False))
             error[2][0].set_visible(self.kwargs.get('errorbar', False))
+            error[1][1].set_visible(self.kwargs.get('errorbar', False))
+            error[1][0].set_visible(self.kwargs.get('errorbar', False))
         self.figure.suptitle(self.kwargs.get('title', ''),
-                             fontsize='x-large', fontname='Consolas')
+                             fontsize='x-large')
         self.errors = errors
-        ax.set_xlabel('Date', fontname='Consolas', fontsize='large')
+        ax.set_xlabel('Date', fontsize='large')
         self.plotEndSignal.emit("plot %s successfully" % self.kwargs.get('title', '').lower())
         self.plotTSEndSignal.emit()
 
         fit = self.kwargs.get('fit', None)
         if fit is not None:
             for ax, c in zip(self.figure.get_axes(), cols):
-                ax.plot(fit.index, fit[c], 'r', label='%s fit' % c)
+                ax.plot(fit.index, fit[c], 'r', label='%s fit' % c, zorder=10)
                 # self.plotEndSignal.emit("plot fit lines successfully")
         offsets = self.kwargs.get('offsets', None)
         if offsets:

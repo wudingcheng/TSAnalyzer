@@ -67,8 +67,8 @@ class TSReader(QThread):
             self.time_unit = time_unit
         if index is None or self.time_unit is None:
             return
-        filter_columns = ['year', 'month', 'day', 'hour', 'minute', 'seconds', 'doy', 'ymd', 'hms',
-                          'mjd']
+        filter_columns = ['year', 'month', 'day', 'hour', 'minute', 'seconds',
+                          'doy', 'ymd', 'hms', 'mjd']
         self.columns = [i for i in col_names if i not in filter_columns and 'sigma' not in i]
         self.columns = [i for i in self.columns if i not in support_time_units]
         if name is None:
@@ -154,12 +154,12 @@ class TSReader(QThread):
                     self.skiprows = i
                     break
         self.columns = ['north', 'east', 'up']
-        self.cols = {0: 'year', 1: 'hour', 15: 'north', 16: 'east', 17: 'up',
+        self.cols = {0: 'ymd', 1: 'hms', 15: 'north', 16: 'east', 17: 'up',
                      18: 'north_sigma', 19: 'east_sigma', 20: 'up_sigma'}
         self._date_parser = lambda x: pd.datetime.strptime(x, '%Y%m%d %H%M%S')
-        self._parser_dates = {'datetime': ['year', 'hour']}
+        self._parser_dates = {'datetime': ['ymd', 'hms']}
         self._read_file()
-        dys = [date2yearfraction(i) for i in self.df.index.date]
+        dys = date2yearfraction(list(self.df.index))
         self.df.insert(0, self.time_unit, dys)
 
     def _read_file(self):
@@ -175,7 +175,7 @@ class TSReader(QThread):
         if self.df is None:
             self._read_file()
         if self.time_unit == 'years':
-            dys = [date2yearfraction(i) for i in self.df.index.date]
+            dys = date2yearfraction(list(self.df.index))
         if self.time_unit == 'days':
             dys = self.df.index.to_julian_date()
         self.df = self.df[self.df.columns].apply(pd.to_numeric)
@@ -398,3 +398,11 @@ class TSReader(QThread):
                       index=True, header=False, date_format='%Y%m%d %H%M%S')
             # df.to_csv(f, sep='\t', float_format='%10.4f', na_rep='nan',
             #           index=True, header=False, date_format='%Y%m%d %H%M%S')
+
+    def cumsum(self, df):
+        df = df.cumsum() - df.mean()
+        return df
+
+    def diff(self, df):
+        df = df.diff()
+        return df

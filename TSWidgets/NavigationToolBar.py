@@ -3,7 +3,6 @@ import os
 import matplotlib
 from matplotlib.backend_bases import NavigationToolbar2, cursors
 from matplotlib.backends.backend_qt5 import SubplotToolQt
-from matplotlib.externals import six
 from PyQt4 import QtCore
 from PyQt4.QtGui import QFileDialog, QIcon, QInputDialog, QMessageBox, QToolBar
 

@@ -21,6 +21,16 @@ TSAnalyzer is based on Python 2.7, so some requirements should be installed befo
 
 TSAnalyzer is based on Python 2.7, GUI is designed by PyQt4. For scientific use, I recommend WinPython on the windows, which is the leading open data science platform powered by Python and compiles scientific packages already, such as Numpy and Scipy.
 Once you have installed WinPython, the requirements already have also been installed.
+
+For Windows users, the installation are list as follows:
+
+1. Download Python 2.7 from the [official website](https://www.python.org/) and Install it;
+2. Download pip tool for packages installation from [pip website](https://pypi.python.org/pypi/pip#downloads) and Install it;
+3. Download Numpy from [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy), then `pip install numpy*.whl` in command prompt;
+4. Download Pandas from [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pandas), then `pip install pandas*.whl` in command prompt;
+5. `pip install matplotlib` in command prompt for installing matplotlib;
+6. Download the latest PyQt4 version from PyQt [official sourceforge website](https://sourceforge.net/projects/pyqt/files/PyQt4);
+
 For Linux users, I would recommend Anaconda which has scientific packages and some requirements except for PyQt4. To install PyQt4, the following commands can be used.
 
 ```bash
@@ -41,29 +51,27 @@ Also, we provide executable software for [win64](https://github.com/wudingcheng/
 
 ### Time Domain Analysis Instructions
 
-![Main Window](http://ww4.sinaimg.cn/large/7030ad8ejw1faur9zld2dj216n0n5aop.jpg)
+![Main Window](./screenshots/introduction.png)
 
 #### Tool Bar (from left to right)
 
-![Main Window Instructions](http://ww3.sinaimg.cn/large/7030ad8ejw1faurblms0kj219c0v9qfy.jpg)
-
-- Home plot view
-- Previous plot view
-- Next plot view
-- Pan the figure
-- Zoom the figure
-- Toggle figure grid lines
-- Subplot Configuration
-- Save the figure
-- Figure Settings (lines, markers, colors)
+- ![](..\TSResource\images\home.png) Home plot view
+- ![](..\TSResource\images\back.png) Previous plot view
+- ![](..\TSResource\images\forward.png) Next plot view
+- ![](..\TSResource\images\pan.png) Pan the figure
+- ![](..\TSResource\images\zoom.png) Zoom the figure
+- ![](..\TSResource\images\grid.png) Toggle figure grid lines
+- ![](..\TSResource\images\subplots.png) Subplot Configuration
+- ![](..\TSResource\images\save.png) Save the figure
+- ![](..\TSResource\images\options.png) Figure Settings (lines, markers, colors)
 
 The above buttons are common in time domain and spectral domain.  The following tool buttons are designed only for Time Domain Analysis.
 
-1. Equipment Break
-2. Earthquake Break
-3. Earthquake Exponential Relaxation
-4. Earthquake Logarithmic Break
-5. Toggle the error bar
+1. ![](..\TSResource\images\ep-break.png) Equipment Break
+2. ![](..\TSResource\images\eq-break.png) Earthquake Break
+3. ![](..\TSResource\images\eq-exp.png)Earthquake Exponential Relaxation
+4. ![](..\TSResource\images\eq-log.png) Earthquake Logarithmic Break
+5. ![](..\TSResource\images\errorbar.png) Toggle the error bar
 
 #### Files (Short-cut)
 
@@ -77,8 +85,8 @@ The above buttons are common in time domain and spectral domain.  The following 
 
 - Edit offset item: double click
 - Write Button: write offsets into file
-- Open Offsets Button: load the offset file
-- Delete Offsets Button: delete the offset file
+- Open Offsets Button ![](..\TSResource\images\editor.png): load the offset file
+- Delete Offsets Button![](..\TSResource\images\delete.png) : delete the offset file
 
 #### Analysis Area
 
@@ -90,13 +98,13 @@ The above buttons are common in time domain and spectral domain.  The following 
 
 ### Spectrum Domain Analysis Instructions
 
-![Spectrum Instructions](http://ww1.sinaimg.cn/large/7030ad8ejw1faurc1m30gj20xs0nagty.jpg)
+![Spectrum Instructions](./screenshots/spectrum_2.png)
 
 #### Tool Bar
 
-- Log button, toggle the figure between linear and log-log axis
-- Highlight Button
-- Annotation Button
+- ![](../TSResource/images/log.png) Log button, toggle the figure between linear and log-log axis
+- ![](../TSResource/images/legend_pick.png) Highlight Button
+- ![](../TSResource/images/tooltip.png) Annotation Button
 
 #### Analysis Area
 
@@ -148,66 +156,83 @@ After adding header comments, we could use TSAnalyzer to load these new files.
 
 ### Time Series Anlysis Step by step
 
-1. Read file
+#### 0. Load File
 
-   Double click the filename to load the file. TSAnalyzer will plot time series files component(s) separately.
+Click the add file(s) button ![](..\TSResource\images\add.png), and choose the time series file(s); the file list widget will display their names.
 
-2. Pick the offsets
+#### 1. Read file
 
-   ![](http://ww1.sinaimg.cn/large/7030ad8ejw1faure3oeq5j20xs0nak0e.jpg)
+Double click the filename to load the file. TSAnalyzer will plot time series files component(s) separately.
 
-   It is not obvious to see offsets because of the outliers’ existence. The outliers have very large uncertainties. Hence we could set sigma criterion to filter theme. In the outlier group, set the IQR factor to 0, and do the remove outliers.
+#### 2. Pick the offsets
 
-   ![](http://ww3.sinaimg.cn/large/7030ad8ejw1faurers1xlj20xs0nan75.jpg)
+![](.\screenshots\1_pick.png)
 
-   From the figure, we could see there existed two offsets. We use break and log break to pick them out. Zoom and pan has been provided on the toolbar to pick accurately.
+It is not obvious to see offsets because of the outliers’ existence. Some outliers have very large uncertainties. Hence we could set sigma criterion to filter theme. In the outlier group, set the IQR factor to 0, and do the remove outliers.
 
-   In the figure, we could see the red rectangle, it records these offsets. You can double click these items to edit accurately from the popup dialog (Figure). After you have pick these offsets, click the write button on the left bottom corner to save these offsets for later use.
+![](.\screenshots\2_edit.png)
 
-3. Remove the outliers
+From the figure, we could see there existed two offsets. We use break and log break to pick them out. Zoom and pan has been provided on the toolbar to pick accurately.
 
-   ![](http://ww2.sinaimg.cn/large/7030ad8ejw1faurf9xeitj20xs0na47s.jpg)
+In the figure, we could see the red rectangle, it records these offsets. You can double click these items to edit accurately from the popup dialog. After you have pick these offsets, click the write button on the left bottom corner to save these offsets for later use.
 
-   In the step 2, we adopt sigma criterion to remove some gross errors. There still some outliers displayed on the plot. So IQR method can be used. IQR factor and IQR window can be input according to your data. Here we select factor 3 and window 365 (a year).
+Another tool for detection offsets we provided is [Sigseg](http://www.ing.unitn.it/~vittia/sw/doc/sig_seg_doc.html), we compile the Sigseg source code to dynamic library, and load them with `ctypes`. As the program is beta version, user should check the Menu >> Tools >> Offsets Detection (Beta).
 
-4. Time Series Analysis
+The result of the detection depends on the values of the parameters. We also provide interactive tools for choose the results:
 
-   In the step 3, IQR method adopt the paraments polynomials and periods. 
+1. click the red `+` symbol on the plot to delete;
+2. Double click the list widget or click the delete button to delete the selected items;
 
-   Polynomial order can be set from 0 to 10, 0 stands for searching the best polynomial order. 
+![](.\screenshots\Sigseg2.png)
 
-   Period not fixed to one, space between each other, and the unit in this data is year, this means we input semi-annual and annual periods.
+After check the results of sigseg, click **Add button**, the results will be add to the main program.
 
-   ![Fit](http://ww3.sinaimg.cn/large/7030ad8ejw1faurfql1dej20xs0naajv.jpg)
+![](.\screenshots\sigseg_2.png)
 
-   ![Continuous](http://ww1.sinaimg.cn/large/7030ad8ejw1faurg5wo9mj20xs0naaiu.jpg)
+#### 3. Remove the outliers
 
-   ![Residuals](http://ww4.sinaimg.cn/large/7030ad8ejw1faurgngw23j20xs0naqct.jpg)
+![](.\screenshots\3_outliers.png)
 
-   If the “Fit” is checked, it plots the fit line on the clean plot, “Continuous” stands for removing any offsets, “Residuals” means plotting residual time series. Click the detrend button to do analysis.
+In the step 2, we adopt sigma criterion to remove some gross errors. There still some outliers displayed on the plot. So IQR method can be used. IQR factor and IQR window can be input according to your data. Here we select factor 3 and window 365 (a year).
 
-   The result will be showed in the popup dialog. If you are boring with popup dialog, in the **Menu View** to uncheck the **show detrend log** button and the result will be should in the **Console Area**.
+#### 4. Time Series Analysis
 
-   ![Detrend Log](http://ww4.sinaimg.cn/large/7030ad8ejw1faurh3f5tsj208s0nstdv.jpg)
+In the step 3, IQR method adopt the paraments polynomials and periods. 
 
-5. Save the Data
+Polynomial order can be set from 0 to 10, 0 stands for searching the best polynomial order. 
 
-   The original data means the input data, if you do some outliers action, then the data is the clean data. The fit data is the red fit line data and the residuals is the difference the original data between fit data.
+Period not fixed to one, space between each other, and the unit in this data is year, this means we input semi-annual and annual periods.
 
-#### Spectral Series Analysis Step by Step
+![](.\screenshots\4_fit.png)
+
+![](.\screenshots\4_continuous.png)
+
+![](.\screenshots\4_residuals.png)
+
+If the “Fit” is checked, it plots the fit line on the clean plot, “Continuous” stands for removing any offsets, “Residuals” means plotting residual time series. Click the detrend button to do analysis.
+
+The result will be showed in the popup dialog. If you are boring with popup dialog, in the **Menu View** to uncheck the **show detrend log** button and the result will be should in the **Console Area**.
+
+![](.\screenshots\4_log.png)
+
+#### 5. Save the Data
+
+The original data means the input data, if you do some outliers action, then the data is the clean data. The fit data is the red fit line data and the residuals is the difference the original data between fit data.
+
+### Spectral Series Analysis Step by Step
 
 Spectral domain analysis is useful for time series analysis. For GNSS coordinates time series, it is common for gap and discontinuities’ existence. So Lomb-Scagle method is used very often. 
 
-![Spectrum Fit](http://ww4.sinaimg.cn/large/7030ad8ejw1faurhrntikj20xs0na475.jpg)
+![](.\screenshots\spectrum.png)
 
 Click the spectral analysis button, the result will be plotted. In the toolbar, there are some tools for better visualization. Log-log axis, highlight lines and annotation tools.
 
-#### Batch Operation
+### Batch Operation
 
 Because of the growing number of GNSS stations, many organizations will process the hundreds or thousands of GNSS time series. TSAnalyzer provide tools for batch analysis, including detrend and plot.
 In the menu batch, there are **detrend** and **plot** batch menus.
 
-##### Detrend Batch
+#### Detrend Batch
 
 ![Detrend Batch](http://ww2.sinaimg.cn/large/7030ad8ejw1faurhzczj2j20oc0kcn4d.jpg)
 
@@ -239,7 +264,7 @@ The batch dialog has a similar operation as the previous time domain analysis’
 
 After setting the parameters mentioned, click batch button and it goes!
 
-##### Figure Batch
+#### Figure Batch
 
 ![Figure Batch](http://ww1.sinaimg.cn/large/7030ad8ejw1faurif8c3qj20n60nkn3g.jpg)
 
@@ -291,7 +316,9 @@ Spectral analysis method is based on Lomb Scargle, the source code comes from As
 - Nikolaidis (2002). Observation of geodetic and seismic deformation.
 - Numpy. http://numpy.org/
 - Pandas. http://pandas.pydata.org/
+- Peak Detection. http://nbviewer.ipython.org/github/demotu/BMC/blob/master/notebooks/DetectPeaks.ipynb
 - PyQt4. https://www.riverbankcomputing.com/
+- Sigseg. http://www.ing.unitn.it/~vittia/sw/doc/sig_seg_doc.html
 - Scipy. http://scipy.org/
 - Tian, Y. (2011). "iGPS: IDL tool package for GPS position time series analysis." GPS Solutions 15 (3): 299-303
 - Zechmeister, M. and M. Kürster (2009). "The generalised Lomb-Scargle periodogram." Astronomy and Astrophysics 496 (2): 577-584.
