@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>aboutWidget</class>
+ <widget class="QWidget" name="aboutWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>496</width>
+    <height>342</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>496</width>
+    <height>342</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>496</width>
+    <height>342</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>PGTSAV</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 75 10pt &quot;Microsoft Yahei&quot;;
+background-color: rgb(255, 255, 255);</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="imgLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>80</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>:/新前缀/icon.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Python GNSS Time Series Analysis and Visualization&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;( TSAnalyzer )&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;hr/&gt;&lt;p&gt;Author: WU Dingcheng, Ph.D. candinate&lt;/p&gt;&lt;p&gt;Email: wudingcheng14@mails.ucas.ac.cn&lt;/p&gt;&lt;p&gt;Insitute of Geodesy and Geophysics, Chinese Academy of Scienses&lt;/p&gt;&lt;hr/&gt;&lt;p&gt;You can distribute the software or modify the codes for non-commerical use. &lt;/p&gt;&lt;p&gt;All rights copyright reserved. &lt;/p&gt;&lt;p&gt;License: GPL&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
