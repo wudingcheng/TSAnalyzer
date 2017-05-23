@@ -52,23 +52,23 @@ After that, the package creates a command `tsanalyzer` in your path. And just ty
 
 #### Tool Bar (from left to right)
 
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/home.png) Home plot view
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/back.png) Previous plot view
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/forward.png) Next plot view
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/pan.png) Pan the figure
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/zoom.png) Zoom the figure
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/grid.png) Toggle figure grid lines
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/subplots.png) Subplot Configuration
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/save.png) Save the figure
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/options.png) Figure Settings (lines, markers, colors)
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/home.png) Home plot view
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/back.png) Previous plot view
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/forward.png) Next plot view
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/pan.png) Pan the figure
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/zoom.png) Zoom the figure
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/grid.png) Toggle figure grid lines
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/subplots.png) Subplot Configuration
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/save.png) Save the figure
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/options.png) Figure Settings (lines, markers, colors)
 
 The above buttons are common in time domain and spectral domain.  The following tool buttons are designed only for Time Domain Analysis.
 
-1. ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/ep-break.png) Equipment Break
-2. ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/eq-break.png) Earthquake Break
-3. ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/eq-exp.png)Earthquake Exponential Relaxation
-4. ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/eq-log.png) Earthquake Logarithmic Break
-5. ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/errorbar.png) Toggle the error bar
+1. ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/ep-break.png) Equipment Break
+2. ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/eq-break.png) Earthquake Break
+3. ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/eq-exp.png)Earthquake Exponential Relaxation
+4. ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/eq-log.png) Earthquake Logarithmic Break
+5. ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/errorbar.png) Toggle the error bar
 
 #### Files (Short-cut)
 
@@ -82,8 +82,8 @@ The above buttons are common in time domain and spectral domain.  The following 
 
 - Edit offset item: double click
 - Write Button: write offsets into file
-- Open Offsets Button ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/editor.png): load the offset file
-- Delete Offsets Button![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/delete.png) : delete the offset file
+- Open Offsets Button ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/editor.png): load the offset file
+- Delete Offsets Button![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/delete.png) : delete the offset file
 
 #### Analysis Area
 
@@ -99,9 +99,9 @@ The above buttons are common in time domain and spectral domain.  The following 
 
 #### Tool Bar
 
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/log.png) Log button, toggle the figure between linear and log-log axis
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/legend_pick.png) Highlight Button
-- ![](https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSResource/images/tooltip.png) Annotation Button
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/log.png) Log button, toggle the figure between linear and log-log axis
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/legend_pick.png) Highlight Button
+- ![]https://raw.githubusercontent.com/wudingcheng/TSAnalyzer/master/TSAnalyzer/TSResource/images/tooltip.png) Annotation Button
 
 #### Analysis Area
 
