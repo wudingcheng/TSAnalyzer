@@ -10,9 +10,11 @@ Time series analysis is important in any areas such as finical, astronomy, geoph
 
 TSAnalyzer is based on Python 2.7, so some requirements should be installed before it launched.
 
-### Requirements
+## Requirements
 
-- PyQt4
+~~- PyQt4~~
+- qtpy
+- PyQt5
 - Matplotlib
 - Numpy
 - Pandas
