@@ -1,0 +1,28 @@
+{
+    "CAND": [
+        "20031222 north offset", 
+        "20040929 up logdecay tau 1", 
+        "20031222 up offset", 
+        "20040929 north logdecay tau 1", 
+        "20031222 east offset", 
+        "20040929 east logdecay tau 1"
+    ], 
+    "CHUM": [
+        "20100216 up offset", 
+        "20080213 up offset", 
+        "20020621 up offset", 
+        "20050125 up offset", 
+        "20070114 up offset", 
+        "20110219 up offset", 
+        "20121230 up offset", 
+        "20070720 up offset", 
+        "20020811 up offset", 
+        "20031222 up offset", 
+        "20140116 up offset", 
+        "20050406 up offset", 
+        "20100518 up offset", 
+        "20021021 up offset", 
+        "20091203 up offset", 
+        "20150111 up offset"
+    ]
+}
