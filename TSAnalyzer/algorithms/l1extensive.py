@@ -135,8 +135,10 @@ def l1filter(t, y,
     else:
         return np.array(x.value)[:, 0], np.array(w.value)[:, 0], None
 
+
 def detrend(t, y):
     pass
+
 
 def l1wrapper(series,
               name,
@@ -150,7 +152,7 @@ def l1wrapper(series,
               trendchange=True):
     if not (offset or trendchange):
         return []
-    x, w, s = l1filter(series['t'], series['y'], periods=periods, lam=lam, rho=rho)
+    x, w, s = l1filter(series['t'], series['y'], periods=periods, lam=lam, rho=rho, solver=solver)
 
     discontinuities = []
     d2x = np.abs(np.diff(x, 2))
@@ -176,16 +178,15 @@ def l1wrapper(series,
     if len(discontinuities) == 0:
         return discontinuities
 
-
     tsfit = TSFit(series)
     discontinuities = tsfit.discontinuitiesSignificanceTest(discontinuities, polys=polys, periods=periods)
     # return discontinuities
     # trendchanges = [i for i in discontinuities if isinstance(i, TrendChangeEvent)]
     # offsets = [i for i in discontinuities if isinstance(i, OffsetEvent)]
     discontinuities = tsfit.discontinutyFTest(F=threshold,
-                                               polys=polys,
-                                               periods=periods,
-                                               discontinuities=discontinuities)
+                                              polys=polys,
+                                              periods=periods,
+                                              discontinuities=discontinuities)
     # for discontinuity in discontinuities:
     #     temp = deepcopy(discontinuities)
     #     flag = tsfit.discontinutyFTest(discontinuity,

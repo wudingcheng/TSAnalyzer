@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from models.offsets import DISCONTINUITIES
+from .models.offsets import DISCONTINUITIES
 from .thread.fit_thread import TSOutliersThread, TSFitThread
 from .thread.l1_thread import TSL1Thread
 from .widgets.batch_widget import L1BatchWidget, FitBatchWidget
 from qtpy.compat import getsavefilename
 from qtpy.QtWidgets import QFileDialog
+
 
 class Controller(object):
     def __init__(self,

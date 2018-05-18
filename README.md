@@ -7,6 +7,7 @@
 - Numpy
 - Pandas
 - cvxpy
+- cvxopt
 
 ## Installation
 

@@ -6,6 +6,7 @@ from ..algorithms.l1extensive import l1wrapper
 from ..models.reader import Reader
 from copy import deepcopy
 
+
 def l1Analysis4Reader(reader, params, logSignal):
     sigma = params.pop('sigma')
     discontinuities = []
@@ -19,6 +20,7 @@ def l1Analysis4Reader(reader, params, logSignal):
             i.component = col
         discontinuities += temp
     return discontinuities
+
 
 class TSL1Thread(QThread):
     sig_log = Signal(str)
@@ -51,6 +53,7 @@ class TSL1Thread(QThread):
         self.sig_log.emit(
             "Finished detection, {} possible discontinuities have been found!".format(len(discontinuities)))
         self.sig_l1_end.emit(discontinuities)
+
 
 class TSL1BatchThread(QThread):
 
@@ -91,5 +94,3 @@ class TSL1BatchThread(QThread):
         if len(failed) > 0:
             self.sig_error.emit("Following files failed:\n{}".format("\n".join(failed)))
         self.sig_l1Batch_end.emit(results)
-
-

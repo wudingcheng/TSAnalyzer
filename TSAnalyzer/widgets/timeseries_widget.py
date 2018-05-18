@@ -6,6 +6,7 @@ from qtpy.QtCore import *
 import os
 from qtpy.uic import loadUi
 
+
 class TimeSeriesAnalysisWidget(QWidget):
 
     name = 'least squares'

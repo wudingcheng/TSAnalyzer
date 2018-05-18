@@ -13,6 +13,7 @@ TSAnalyzer V2.0 is based on Python, it supports Python 2 and Python 3, so some r
 - Numpy
 - Pandas
 - cvxpy (For offset detection, the solver [MOSEK](https://www.mosek.com/downloads/) is better)
+- cvxopt
 
 ### Installation
 
@@ -67,7 +68,7 @@ With the tool bar provided, the user can do interaction with the figure. Discont
 
 #### Discontinuity Detection
 
-The mathematical models for L1 Extensive Model is: 
+The mathematical models for L1 Extensive Model is:
 
 $$\text{minize}\quad \frac{1}{2}\lVert \mathbf{y} - \mathbf{x} - \mathbf{s} - \mathbf{w} \rVert_2^2+\lambda \lVert D^{2}\mathbf{x} \rVert_1 + \rho \lVert D^{1}\mathbf{w} \rVert_1$$
 
@@ -97,9 +98,6 @@ y(t_i) = a + \sum_{i=1}^{n}b_i(t_i-t_0)^i + \sum_{i=1}^{n_p}\left( c_i \sin (2\p
 \sum_{i=1}^{n_l}\left(C_{l_i} + l_i H\ln (1 + \frac{t_i - t_{eq}}{\tau})\right) + \sum_{i=1}^{n_e}\left(C_{e_i} + e_i H (1-e^{(-1(t-t_{eq_i}/\tau))})\right) + v_i
 $$
 
-\\\begin{align}
-
-\\end{align}
 
 `* if the math equations cannot be rendered, please refer to the pdf file`
 

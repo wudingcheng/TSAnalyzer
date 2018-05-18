@@ -21,6 +21,7 @@ setup(
         'pandas',
         'numpy',
         'qtpy',
-        'cvxpy'],
+        'cvxpy',
+        'cvxopt'],
     entry_points={'gui_scripts': ['TSAnalyzer = TSAnalyzer:main']}
 )

@@ -10,6 +10,7 @@ from qtpy.compat import getopenfilename, getsavefilename
 from qtpy.uic import loadUi
 import os
 
+
 class DiscontinuityTreeItem(QTreeWidgetItem):
 
     sig_discontinuity_updated = Signal(DiscontinuityEvent, DiscontinuityEvent)
@@ -191,9 +192,11 @@ class DiscontinuityTreeWidget(QTreeWidget):
             if not item.isHidden():
                 self.sig_discontinuity_removed.emit(discontinuity)
 
+
 def _(text, disambiguation=None, context='DiscontinuitiesDock'):
     """Translate text."""
     return QCoreApplication.translate(context, text, disambiguation)
+
 
 class DiscontinuitiesDockWidget(QDockWidget):
     sig_discontinuity_removed = Signal(DiscontinuityEvent)
@@ -220,7 +223,7 @@ class DiscontinuitiesDockWidget(QDockWidget):
         self.menu = QMenu(self)
 
         # combo additems
-        self.widget.comboBox.addItems(["All"] + DISCONTINUITIES.keys())
+        self.widget.comboBox.addItems(["All"] + list(DISCONTINUITIES.keys()))
         self.widget.comboBox.currentTextChanged.connect(self.slotOnVisibleDiscontinuities)
 
     def __initActions(self):

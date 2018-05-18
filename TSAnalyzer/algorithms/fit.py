@@ -107,16 +107,17 @@ class TSFit(object):
         model = WLS(self.series['y'], A, weights=self.series['dy'])
         model.data.xnames = parameters
         result = model.fit()
+        import pickle
+        pickle.dump(A, open('A.pkl', 'wb'))
+        pickle.dump(result, open('Result.pkl', 'wb'))
         return result
-        # import pickle
-        # pickle.dump(A, open('A.pkl', 'wb'))
         P = np.diag(1.0 / self.series['dy'] ** 2)
         AP = np.dot(A.T, P)
         N = np.dot(AP, A)
         Q_xx = np.linalg.inv(N)
         W = np.dot(AP, self.series['y'])
         p = np.dot(Q_xx, W)
-        # pickle.dump(p, open('p.pkl', 'wb'))
+        pickle.dump(p, open('p.pkl', 'wb'))
         fit = np.dot(A, p)
         v = fit - self.series['y']
         result = {'parameters': parameters, 'p': p}
