@@ -1,0 +1,23 @@
+QMainWindow, QWidget {
+    font: 10pt "Microsoft YaHei";
+}
+
+QDockWidget {
+    font: bold;
+}
+
+QGroupBox {
+    border: 1px solid rgb(200, 200, 200);
+    margin-top: 18px;
+}
+
+QGroupBox:title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding-right: 20000px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    background-color: rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(200, 200, 200);
+}

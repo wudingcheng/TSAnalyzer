@@ -1,0 +1,6 @@
+matplotlib
+pandas
+numpy
+qtpy
+cvxpy
+cvxopt

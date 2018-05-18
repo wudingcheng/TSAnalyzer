@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='TSAnalyzer',
-    version='2.0',
+    version='2.0.1',
     description='Python GNSS Time Series Analysis and Visualization',
     license='GPL v3',
     author='WU Dingcheng',
