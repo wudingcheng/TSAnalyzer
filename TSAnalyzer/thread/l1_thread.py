@@ -88,7 +88,7 @@ class TSL1BatchThread(QThread):
                 self.reader.readFile(f)
                 results[self.reader.name] = l1Analysis4Reader(self.reader, params, self.sig_log)
             except Exception as ex:
-                self.sig_error.emit("{} failed! ({})".format(f).format(ex))
+                self.sig_error.emit("{} failed! ({})".format(f, ex))
                 failed.append(f)
             self.sig_l1Batch_progress.emit((i + 1) / n)
         if len(failed) > 0:
