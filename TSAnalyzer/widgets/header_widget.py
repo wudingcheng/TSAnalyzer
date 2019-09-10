@@ -63,7 +63,6 @@ class TSHeaderThread(QThread):
         files_count = len(self.files)
         for i, filename in enumerate(self.files):
             with open(filename, 'r') as f:
-                # self.consoleLabel.setText('Appending Header to %s' % filename)
                 lines = f.readlines()
                 header_line = self.get_header(filename)
                 content = self.header + ''.join(lines[header_line:])
@@ -73,7 +72,7 @@ class TSHeaderThread(QThread):
                 f.write(content)
             # self.done += 1
             # self.progressBar.setValue(self.done * 100.0 / self.cout)
-            self.progressSignal.emit((i + 1) / files_count, filename)
+            self.progressSignal.emit((i + 1) * 100.0/ files_count, filename)
 
 class FileHeaderWidget(QWidget):
 
@@ -107,13 +106,11 @@ class FileHeaderWidget(QWidget):
             self.directory = str(directory)
 
     def _click_addFilesButton(self):
-        # dialog = QFileDialog(self)
-        # files = dialog.getOpenFileNames(
-        #     None, "Choose Time Series Files", '',
-        #     'tseries (*.*)', None, QFileDialog.DontUseNativeDialog)
         files = getopenfilenames(
             None, "Choose Time Series Files", '',
-            'tseries (*.*)', None, QFileDialog.DontUseNativeDialog)[0]
+            'tseries (*.*)', 
+            None, 
+            QFileDialog.DontUseNativeDialog)[0]
         files = [i for i in files]
         items = []
         for index in range(self.filesListWidget.count()):
@@ -159,7 +156,7 @@ class FileHeaderWidget(QWidget):
     def _get_input(self):
         str(self.unitEdit.text())
         float(self.scaleEdit.text())
-        column_indexs = map(float, str(self.colIndexEdit.text()).split())
+        column_indexs = list(map(float, str(self.colIndexEdit.text()).split()))
         if len(column_indexs) == 0:
             return self._error_promopt("Columns not specified!")
         column_names = str(self.colNameEdit.text()).split()

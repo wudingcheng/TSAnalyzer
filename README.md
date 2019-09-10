@@ -1,4 +1,4 @@
-# TSAnalyzer 2.0
+# TSAnalyzer 2.0.1
 
 ## Requirements
 
@@ -11,7 +11,9 @@
 
 ## Installation
 
-Before installing this package, the [Anaconda](https://anaconda.org/) is recommended to be installed. *TSAnalyzer* can support both Python2 and Python3.
+Before installing this package, the above requirements should be installed. For windows user, `cvxpy` package and its dependencies can be download at [[Unofficial Windows Binaries for Python Extension Packages](https://www.lfd.uci.edu/~gohlke/pythonlibs/)].
+
+The [Anaconda](https://anaconda.org/) is recommended to be installed. *TSAnalyzer* can support both Python2 and Python3. *TSAnalyzer* is planning to pnly support Python3.
 
 - Download this repo,  and `python setup.py install` on common line prompt.
 - `pip install tsanalyzer`
@@ -26,6 +28,20 @@ For detail information and help, please refer to [DOC](doc/).
 For more information and support, please contact me directly.
 
 Email: wudingcheng14 at mails.ucas.ac.cn.
+
+## Version Update
+
+### v2.0.1
+
+- Fix bugs for *Header Convert Tool*;
+- Fix bugs for `TSAnalyzer.models.reader`;
+- Fix bugs for some UI layout;
+
+## Todo
+
+- Update L1 regularization for detection offsets and trendchanges;
+- Offsets detection and output format;
+- test scripts;
 
 ## License
 

@@ -188,9 +188,13 @@ class DiscontinuityTreeWidget(QTreeWidget):
             self.sig_discontinuity_removed.emit(discontinuity)
 
     def slotOnClearDiscontinuities(self):
-        for discontinuity, item in self._discontinuities.items():
+        for discontinuity in list(self._discontinuities):
+            item = self._discontinuities[discontinuity]
             if not item.isHidden():
                 self.sig_discontinuity_removed.emit(discontinuity)
+        # for discontinuity, item in self._discontinuities.items():
+        #     if not item.isHidden():
+        #         self.sig_discontinuity_removed.emit(discontinuity)
 
 
 def _(text, disambiguation=None, context='DiscontinuitiesDock'):

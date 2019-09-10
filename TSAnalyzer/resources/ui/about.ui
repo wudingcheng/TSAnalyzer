@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>496</width>
-    <height>342</height>
+    <width>782</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,18 +22,11 @@
     <height>342</height>
    </size>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>496</width>
-    <height>342</height>
-   </size>
-  </property>
   <property name="windowTitle">
    <string>TSAnalyzer</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">font: 75 10pt &quot;Microsoft Yahei&quot;;
-background-color: rgb(255, 255, 255);</string>
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -72,7 +65,7 @@ background-color: rgb(255, 255, 255);</string>
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Python GNSS Time Series Analysis and Visualization&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;( TSAnalyzer Ver 2.0 )&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Python GNSS Time Series Analysis and Visualization&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;( TSAnalyzer Ver 2.0.1 )&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
@@ -84,7 +77,7 @@ background-color: rgb(255, 255, 255);</string>
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;hr/&gt;&lt;p&gt;Author: WU Dingcheng, YAN Haoming, YUAN Shenglin&lt;/p&gt;&lt;p&gt;Email: wudingcheng14@mails.ucas.ac.cn&lt;/p&gt;&lt;p&gt;Insitute of Geodesy and Geophysics, Chinese Academy of Scienses&lt;/p&gt;&lt;hr/&gt;&lt;p&gt;You can distribute the software or modify the codes for non-commerical use. &lt;/p&gt;&lt;p&gt;All rights copyright reserved. &lt;/p&gt;&lt;p&gt;License: GPL&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;hr/&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Author: WU Dingcheng, YAN Haoming, YUAN Shenglin&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Email: wudingcheng14@mails.ucas.ac.cn&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Insitute of Geodesy and Geophysics, Chinese Academy of Scienses&lt;/span&gt;&lt;/p&gt;&lt;hr/&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;You can distribute the software or modify the codes for non-commerical use. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;All rights copyright reserved. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;License: GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>

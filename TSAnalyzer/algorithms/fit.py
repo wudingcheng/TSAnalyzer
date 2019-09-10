@@ -36,9 +36,12 @@ class TSFit(object):
             iqr_window = kwargs['iqr_window']
             result = self.fit(**kwargs['lst'])
             residuals = pd.Series(result.resid, index=self.series.index)
-            median = residuals.rolling(window=iqr_window).median().fillna(method='bfill')
-            q75 = residuals.rolling(window=iqr_window).quantile(0.75).fillna(method='bfill')
-            q25 = residuals.rolling(window=iqr_window).quantile(0.25).fillna(method='bfill')
+            median = residuals.rolling(
+                window=iqr_window).median().fillna(method='bfill')
+            q75 = residuals.rolling(window=iqr_window).quantile(
+                0.75).fillna(method='bfill')
+            q25 = residuals.rolling(window=iqr_window).quantile(
+                0.25).fillna(method='bfill')
             qrange = iqr_factor * (q75 - q25)
             low = median - qrange
             high = median + qrange
@@ -57,7 +60,8 @@ class TSFit(object):
 
         if discontinuities:
             discontinuities = sorted(discontinuities)
-            discontinuities = [i for i in discontinuities if date_start < i.date < date_end]
+            discontinuities = [
+                i for i in discontinuities if date_start < i.date < date_end]
 
         if polys == -1:
             polys = self.determineBestPolys(periods=periods,
@@ -66,7 +70,8 @@ class TSFit(object):
         return self._fit(polys=polys, periods=periods, discontinuities=discontinuities)
 
     def determineBestPolys(self, periods=None, discontinuities=None):
-        aics = [self._fit(polys=i, periods=periods, discontinuities=discontinuities)['aic'] for i in range(1, 11)]
+        aics = [self._fit(polys=i, periods=periods, discontinuities=discontinuities)[
+            'aic'] for i in range(1, 11)]
         polys = aics.index(min(aics)) + 1
         return polys
 
@@ -102,15 +107,13 @@ class TSFit(object):
              polys=1,
              periods=None,
              discontinuities=None):
-        A, parameters = self.getDesignMatrix(polys=polys, periods=periods, discontinuities=discontinuities)
-        # A = pd.DataFrame(A, columns=parameters)
+        A, parameters = self.getDesignMatrix(
+            polys=polys, periods=periods, discontinuities=discontinuities)
         model = WLS(self.series['y'], A, weights=self.series['dy'])
         model.data.xnames = parameters
         result = model.fit()
-        import pickle
-        pickle.dump(A, open('A.pkl', 'wb'))
-        pickle.dump(result, open('Result.pkl', 'wb'))
         return result
+        
         P = np.diag(1.0 / self.series['dy'] ** 2)
         AP = np.dot(A.T, P)
         N = np.dot(AP, A)
@@ -131,7 +134,8 @@ class TSFit(object):
         chi_square = np.dot(v**2, w)
         result['chi_square'] = chi_square
         nrms = np.sqrt(chi_square / (self.nepochs - A.shape[1]))
-        wrms = np.sqrt((self.nepochs / (self.nepochs - A.shape[1])) * chi_square / sum(w))
+        wrms = np.sqrt(
+            (self.nepochs / (self.nepochs - A.shape[1])) * chi_square / sum(w))
         result['nrms'] = nrms
         result['wrms'] = wrms
         return result
@@ -159,7 +163,8 @@ class TSFit(object):
         #
         #     discontinuities = temp
         # while 1:
-        A, params = self.getDesignMatrix(polys=polys, periods=periods, discontinuities=discontinuities)
+        A, params = self.getDesignMatrix(
+            polys=polys, periods=periods, discontinuities=discontinuities)
         model = WLS(self.series['y'], A, weights=self.series['dy'])
         model.data.xnames = params
         result = model.fit()
@@ -174,26 +179,24 @@ class TSFit(object):
                            polys=1,
                            periods=None,
                            discontinuities=None):
-        A, _ = self.getDesignMatrix(polys=polys, periods=periods, discontinuities=discontinuities)
+        A, _ = self.getDesignMatrix(polys=polys,
+                                    periods=periods,
+                                    discontinuities=discontinuities)
         _, chi_square, p1, _ = np.linalg.lstsq(A, self.series['y'])
 
-        # discontinuities.remove(discontinuity)
-        # A, _ = self.getDesignMatrix(polys=polys, periods=periods, discontinuities=discontinuities)
-        ind = discontinuities.index(discontinuity) + polys + 2 * len(periods) + 1
+        ind = discontinuities.index(
+            discontinuity) + polys + 2 * len(periods) + 1
         npar = discontinuity.nParameters()
         A = np.delete(A, range(ind, ind + npar), axis=1)
         _, chi_square_2, p2, _ = np.linalg.lstsq(A, self.series['y'])
 
-        fvalue = (chi_square_2 - chi_square) * (self.nepochs - p1) / (chi_square * (p1 - p2))
+        fvalue = (chi_square_2 - chi_square) * \
+            (self.nepochs - p1) / (chi_square * (p1 - p2))
         return fvalue[0]
-        # return fvalue > F
 
     def discontinutyFTest(self, F=200, polys=1, periods=None, discontinuities=None):
-        # from copy import dee
         while 1:
-            # f = np.zeros(len(discontinuities))
             f = []
-            flag = 0
             for i, discontinuity in enumerate(discontinuities):
                 temp = discontinuities[:]
                 fval = self._discontinutyFTest(discontinuity,
@@ -201,13 +204,6 @@ class TSFit(object):
                                                periods=periods,
                                                discontinuities=temp)
                 f.append(fval)
-                # if fval < F:
-                #     discontinuities.pop(i)
-                #     break
-                # else:
-                #     flag += 1
-            # if flag == len(discontinuities):
-            #     return discontinuities
 
             f_min = min(f)
             if f_min > F:
@@ -222,7 +218,8 @@ class TSFit(object):
         parameters = results['parameters']
         p = results['p']
         psigma = results['psigma']
-        log = "NRMS: {:.1f}, WRMS {:.1f}\n".format(results['nrms'], results['wrms'])
+        log = "NRMS: {:.1f}, WRMS {:.1f}\n".format(
+            results['nrms'], results['wrms'])
         for par, v, sigma in zip(parameters, p, psigma):
             log += "{}: {:.6f} +- {:.6f}\n".format(par, v, sigma)
         return log

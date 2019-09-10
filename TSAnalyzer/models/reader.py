@@ -1,10 +1,11 @@
 #!/usr/bin/env python
+# author: WU Dingcheng
 # -*- coding: utf-8 -*-
 from qtpy.QtCore import QObject, Signal
 import pandas as pd
-import numpy as np
 import os
-from ..algorithms.date import date2yearfraction, yearfraction2date, mjd2date
+from ..algorithms.date import (date2yearfraction, yearfraction2date,
+                               mjd2date, mjd2yearfraction)
 
 
 class Reader(QObject):
@@ -18,6 +19,7 @@ class Reader(QObject):
         self.skiprows = 0
         self.cols = None
         self.columns = None
+        self.is_read = False
 
     def _readHeader(self, filename):
         if not os.path.isfile(filename):
@@ -32,6 +34,8 @@ class Reader(QObject):
         with open(filename, 'r') as f:
             lines = f.readlines()
             for line in lines:
+                if not line.startswith("#"):
+                    break
                 if line.startswith("# name"):
                     name = line.strip().split()[-1]
                 if line.startswith("# column_names"):
@@ -79,8 +83,15 @@ class Reader(QObject):
                               usecols=cols,
                               skiprows=self.skiprows)
         index = list(map(mjd2date, self.df['mjd']))
+        if self.time_unit == 'years':
+            years = list(map(mjd2yearfraction, self.df['mjd']))
+            self.df[self.time_unit] = years
+        if self.time_unit == 'days':
+            self.df[self.time_unit] = self.df['mjd']
         del self.df['mjd']
         self.df.index = index
+        self.df.index.name = 'datetime'
+        self.is_read = True
 
     def readFile(self, filename):
         self.filename = filename
@@ -131,6 +142,8 @@ class Reader(QObject):
 
     def _readDAT(self, filename):
         self._readHeader(filename)
+        if self.is_read:
+            return
         self._readFile(filename)
         self.df = self.df.apply(lambda i: i * self.scale)
         if not self.time_unit in self.df.columns:
@@ -143,6 +156,7 @@ class Reader(QObject):
         for col in self.columns:
             if '{}_sigma'.format(col) not in self.df.columns:
                 self.df['{}_sigma'.format(col)] = 1
+        self.is_read = True
 
     def _readNEU(self, filename):
         self.name = os.path.split(self.filename)[1][: 4].upper()
@@ -154,10 +168,15 @@ class Reader(QObject):
                      4: 'north_sigma', 5: 'east_sigma', 6: 'up_sigma'}
         cols = sorted(self.cols.keys())
         names = [self.cols[i] for i in cols]
-        self.df = pd.read_csv(self.filename, header=None, sep="\s+", comment='#',
-                              names=names, usecols=cols)
+        self.df = pd.read_csv(self.filename,
+                              header=None,
+                              sep="\s+",
+                              comment='#',
+                              names=names,
+                              usecols=cols)
         time_index = [yearfraction2date(i) for i in self.df.years]
         self.df.index = time_index
+        self.is_read = True
 
     def _readTSERIES(self, filename):
         self.name = os.path.split(filename)[1][: 4].upper()
@@ -167,12 +186,17 @@ class Reader(QObject):
         self.columns = ['north', 'east', 'up']
         self.cols = {0: 'years', 1: 'east', 2: 'north', 3: 'up',
                      4: 'east_sigma', 5: 'north_sigma', 6: 'up_sigma',
-                     11: 'year', 12: 'month', 13: 'day', 14: 'hour', 15: 'minute', 16: 'seconds'}
+                     11: 'year', 12: 'month', 13: 'day', 14: 'hour',
+                     15: 'minute', 16: 'seconds'}
         # self._parser_dates = [11, 12, 13, 14, ...] # which is not right
-        self._parser_dates = {'datetime': ['year', 'month', 'day', 'hour', 'minute', 'seconds']}
-        self._date_parser = lambda x: pd.datetime.strptime(x, '%Y %m %d %H %M %S')
+        self._parser_dates = {'datetime': [
+            'year', 'month', 'day', 'hour', 'minute', 'seconds']}
+        self._date_parser = lambda x: pd.datetime.strptime(
+            x, '%Y %m %d %H %M %S')
         self._readFile(filename)
-        self.df.iloc[:, 1:] = self.df.iloc[:, 1:].apply(lambda i: i * self.scale)
+        self.df.iloc[:, 1:] = self.df.iloc[:, 1:].apply(
+            lambda i: i * self.scale)
+        self.is_read = True
 
     def saveTODAT(self, df, filename):
         df = df.dropna()

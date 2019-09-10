@@ -54,7 +54,7 @@ class DateDialog(QDialog):
             if radio.isChecked():
                 text = edit.text()
                 if radio == self.dateRadio:
-                    dt = map(int, text.split("-")) + [12]
+                    dt = list(map(int, text.split("-"))) + [12]
                     date = datetime(*dt)
                     mjd = date2mjd(date)
                     self.mjdEdit.setValue(date2mjd(date))

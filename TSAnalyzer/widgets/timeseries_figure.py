@@ -215,10 +215,6 @@ class TimeSeriesWidget(QWidget):
         self.thread.renderFitOrResiduals(df, columns, task)
         self.thread.start()
 
-    # def slotOnResiduals(self, df, columns):
-    #     self.thread.renderResiduals(df, columns, task='residuals')
-    #     self.thread.start()
-
     def slotMouseMoved(self, evt):
         x, y = evt.x, evt.y
         label = ""
@@ -324,7 +320,7 @@ class TimeSeriesWidget(QWidget):
         # self.setLabelAndCursorVisible(True)
         pass
 
-    def slotLeaveAxesEvent(self):
+    def slotLeaveAxesEvent(self, evt):
         self.setLabelAndCursorVisible(False)
 
     def setLabelAndCursorVisible(self, flag):

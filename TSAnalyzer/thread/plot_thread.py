@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-#author: WU Dingcheng
+# author: WU Dingcheng
 # -*- coding: utf-8 -*-
 
 from qtpy.QtCore import QThread, Signal
+
 
 class TimeSeriesThread(QThread):
     sig_time_series_end = Signal()
@@ -27,7 +28,11 @@ class TimeSeriesThread(QThread):
             #             self.obj.df[col],
             #             yerr=self.obj.df['{}_sigma'.format(col)])
             # self.obj.df[col].plot(ax=ax, marker='.', linewidth=0.5, markersize=1)
-            ax.plot(self.obj.df.index, self.obj.df[col], '.-', linewidth=0.5, markersize=2)
+            ax.plot(self.obj.df.index,
+                    self.obj.df[col],
+                    '.-',
+                    linewidth=0.5,
+                    markersize=2)
             if i < n - 1:
                 ax.set_xlabel("")
 
@@ -38,7 +43,6 @@ class TimeSeriesThread(QThread):
         self.columns = columns
         self.task = task
 
-
     def _renderFit(self):
         self.renderReader()
         for i, col in enumerate(self.columns):
@@ -47,14 +51,14 @@ class TimeSeriesThread(QThread):
             self._fitLines.append(line)
         self.figure.canvas.draw_idle()
 
-
     def _renderResiduals(self):
         self.figure.clear()
         n = len(self.columns)
         self.figure.suptitle(self.obj.name)
         for i, col in enumerate(self.obj.columns):
             ax = self.figure.add_subplot(n, 1, i + 1)
-            ax.plot(self.df.index, self.df[col], '.-', linewidth=0.5, markersize=2)
+            ax.plot(self.df.index, self.df[col],
+                    '.-', linewidth=0.5, markersize=2)
             if i < n - 1:
                 ax.set_xlabel("")
         self.sig_time_series_end.emit()
@@ -66,4 +70,3 @@ class TimeSeriesThread(QThread):
             self._renderFit()
         if self.task == 'residuals':
             self._renderResiduals()
-

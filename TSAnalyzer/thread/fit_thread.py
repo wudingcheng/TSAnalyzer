@@ -7,6 +7,7 @@ from ..algorithms.fit import TSFit
 import pandas as pd
 import os
 
+
 class TSOutliersThread(QThread):
     sig_log = Signal(str)
     sig_error = Signal(str)
@@ -21,7 +22,8 @@ class TSOutliersThread(QThread):
 
     def run(self):
         for col in self.reader.columns:
-            series = self.reader.df[[self.reader.time_unit, col, '{}_sigma'.format(col)]]
+            series = self.reader.df[[
+                self.reader.time_unit, col, '{}_sigma'.format(col)]]
             series.columns = ['t', 'y', 'dy']
             self.sig_log.emit("Remove {} outliers.".format(col))
             try:
@@ -29,9 +31,11 @@ class TSOutliersThread(QThread):
                 self.parameters['lst']['discontinuities'] = self.offsetsHandler.getSiteComponentOffsets(
                     self.reader.name, col)
                 series = tsfit.outliers(**self.parameters)
-                self.reader.df[[col, '{}_sigma'.format(col)]] = series[['y', 'dy']]
+                self.reader.df[[col, '{}_sigma'.format(col)]] = series[[
+                    'y', 'dy']]
             except Exception as ex:
                 self.sig_error.emit(str(ex))
+
 
 class TSFitThread(QThread):
     sig_log = Signal(str)
@@ -53,18 +57,24 @@ class TSFitThread(QThread):
             residuals = []
             log = '{} Fit:\n'.format(self.reader.filename)
             for col in self.reader.columns:
-                series = self.reader.df[[self.reader.time_unit, col, '{}_sigma'.format(col)]]
-                series.columns = ['t', 'y', 'dy']
+                if '{}_sigma'.format(col) in self.reader.df.columns:
+                    series = self.reader.df[
+                        [self.reader.time_unit, col, '{}_sigma'.format(col)]]
+                    series.columns = ['t', 'y', 'dy']
+                else:
+                    series = self.reader.df[[self.reader.time_unit, col]]
+                    series.columns = ['t', 'y']
                 tsfit = TSFit(series)
                 self.parameters['discontinuities'] = self.offsetsHandler.getSiteComponentOffsets(
                     self.reader.name, col)
                 results[col] = tsfit.fit(**self.parameters)
-                # fit.append(pd.Series(results[col]['fit'], name=col, index=tsfit.series.index))
-                # residuals.append(pd.Series(results[col]['v'], name=col, index=tsfit.series.index))
-                # log += tsfit.log(results[col])
-                residuals.append(pd.Series(results[col].resid, name=col, index=tsfit.series.index))
-                fit.append(pd.Series(results[col].fittedvalues, name=col, index=tsfit.series.index))
-                log += results[col].summary2(title='{} {}'.format(self.reader.name, col)).as_text()
+                
+                residuals.append(
+                    pd.Series(results[col].resid, name=col, index=tsfit.series.index))
+                fit.append(
+                    pd.Series(results[col].fittedvalues, name=col, index=tsfit.series.index))
+                log += results[col].summary2(
+                    title='{} {}'.format(self.reader.name, col)).as_text()
             log = log.replace('\n', '<br>')
             self.sig_log.emit(log)
             fit = pd.concat(fit, axis=1)
@@ -72,6 +82,7 @@ class TSFitThread(QThread):
             self.sig_fit_end.emit({'fit': fit, 'residuals': residuals})
         except Exception as ex:
             self.sig_error.emit(str(ex))
+
 
 class TSFitBatchThread(QThread):
 
@@ -107,16 +118,20 @@ class TSFitBatchThread(QThread):
         self.reader.readFile(filename)
         log = 'File: {}\n'.format(filename)
         for col in self.reader.columns:
-            series = self.reader.df[[self.reader.time_unit, col, '{}_sigma'.format(col)]]
+            series = self.reader.df[[
+                self.reader.time_unit, col, '{}_sigma'.format(col)]]
             series.columns = ['t', 'y', 'dy']
             tsfit = TSFit(series)
-            self.params['discontinuities'] = self.handler.getSiteComponentOffsets(self.reader.name, col)
+            self.params['discontinuities'] = self.handler.getSiteComponentOffsets(
+                self.reader.name, col)
             results[col] = tsfit.fit(**self.params)
             # residuals.append(pd.Series(results[col]['v'], name=col, index=tsfit.series.index))
             # log += tsfit.log(results[col])
             # log += '\n'
-            residuals.append(pd.Series(results[col].resid, name=col, index=tsfit.series.index))
-            log = results[col].summary(title='{} {}'.format(self.reader.name, col)).as_text()
+            residuals.append(
+                pd.Series(results[col].resid, name=col, index=tsfit.series.index))
+            log = results[col].summary(
+                title='{} {}'.format(self.reader.name, col)).as_text()
         residuals = pd.concat(residuals, axis=1)
         with open('{}/{}.log'.format(self.logDir, self.reader.name), 'w') as f:
             f.write(log)
@@ -136,4 +151,3 @@ class TSFitBatchThread(QThread):
             self.sig_fitBatch_progress.emit((i + 1) / n)
 
         self.sig_log.emit("End!")
-

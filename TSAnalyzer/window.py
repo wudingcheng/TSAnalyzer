@@ -9,7 +9,8 @@ import sys
 from .widgets.timeseries_figure import TimeSeriesWidget
 from .widgets.timeseries_toolbar import TimeSeriesToolBar
 from .widgets.file_dockwidget import FileDockWidget
-from .widgets.discontinuity_dockwidget import DiscontinuityDockWidget
+# from .widgets.discontinuity_dockwidget import DiscontinuityDockWidget
+from .widgets.discontinuity_dock import DiscontinuitiesDockWidget
 from .widgets.analysis_dockwidget import AnalysisDockWidget
 from .widgets.console_dock import ConsoleDockWidget
 from .widgets.about_dialog import AboutDialog
@@ -72,7 +73,6 @@ class TSAnalyzerMainWindow(QMainWindow):
 
         # discontinuity dock
         # self.discontinuityDock = DiscontinuityDockWidget(self)
-        from .widgets.discontinuity_dock import DiscontinuitiesDockWidget
         self.discontinuityDock = DiscontinuitiesDockWidget(self)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.discontinuityDock)
 

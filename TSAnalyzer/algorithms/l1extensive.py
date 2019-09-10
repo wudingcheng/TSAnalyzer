@@ -101,9 +101,9 @@ def l1filter(t, y,
     prob = cvx.Problem(obj)
     prob.solve(solver=solver, verbose=verbose)
     if periods:
-        return np.array(x.value)[:, 0], np.array(w.value)[:, 0], np.array(seasonal.value)[:, 0]
+        return np.array(x.value), np.array(w.value), np.array(seasonal.value)
     else:
-        return np.array(x.value)[:, 0], np.array(w.value)[:, 0], None
+        return np.array(x.value), np.array(w.value), None
     t = np.asarray(t, dtype=np.float64)
     y = np.asarray(y, dtype=np.float64)
     n = len(t)
@@ -131,9 +131,9 @@ def l1filter(t, y,
     prob = cvx.Problem(obj)
     prob.solve(solver=solver, verbose=verbose)
     if periods:
-        return np.array(x.value)[:, 0], np.array(w.value)[:, 0], np.array(seasonal.value)[:, 0]
+        return np.array(x.value), np.array(w.value), np.array(seasonal.value)
     else:
-        return np.array(x.value)[:, 0], np.array(w.value)[:, 0], None
+        return np.array(x.value), np.array(w.value), None
 
 
 def detrend(t, y):
