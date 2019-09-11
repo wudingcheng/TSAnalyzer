@@ -1,6 +1,0 @@
-matplotlib
-pandas
-numpy
-qtpy
-cvxpy==0.4.11
-cvxopt
