@@ -142,8 +142,8 @@ class Reader(QObject):
 
     def _readDAT(self, filename):
         self._readHeader(filename)
-        if self.is_read:
-            return
+        # if self.is_read:
+        #     return
         self._readFile(filename)
         self.df = self.df.apply(lambda i: i * self.scale)
         if not self.time_unit in self.df.columns:
@@ -229,6 +229,7 @@ class Reader(QObject):
                       date_format='%Y%m%d %H%M%S')
 
     def clear(self):
+        self.is_read = False
         self.df = None
         self.name = None
         self.filename = None

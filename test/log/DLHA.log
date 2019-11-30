@@ -1,0 +1,29 @@
+                                   DLHA up                                    
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.198
+Model:                            WLS   Adj. R-squared:                  0.197
+Method:                 Least Squares   F-statistic:                     335.6
+Date:                Sat, 30 Nov 2019   Prob (F-statistic):          3.21e-322
+Time:                        11:15:07   Log-Likelihood:                -41965.
+No. Observations:                6803   AIC:                         8.394e+04
+Df Residuals:                    6797   BIC:                         8.398e+04
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+t**0            -57.6256      2.204    -26.149      0.000     -61.946     -53.306
+t**1              4.3322      0.261     16.570      0.000       3.820       4.845
+0.5 cycle sin   -41.9992      1.773    -23.687      0.000     -45.475     -38.523
+0.5 cycle cos    -3.0246      1.842     -1.642      0.101      -6.635       0.586
+1.0 cycle sin    29.4529      1.822     16.166      0.000      25.881      33.024
+1.0 cycle cos    34.3231      1.798     19.085      0.000      30.798      37.848
+==============================================================================
+Omnibus:                    22778.005   Durbin-Watson:                   1.636
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):       5391655196.588
+Skew:                         -58.994   Prob(JB):                         0.00
+Kurtosis:                    4362.709   Cond. No.                         15.0
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
