@@ -16,6 +16,7 @@ class TimeSeriesAnalysisWidget(QWidget):
     sig_l1_clicked = Signal(dict)
     sig_l1_bacth = Signal(dict)
     sig_data_saved = Signal()
+    sig_data_changed = Signal(str)
 
     def __init__(self, parent=None, reader=None):
         super(TimeSeriesAnalysisWidget, self).__init__(parent=parent)
@@ -27,6 +28,8 @@ class TimeSeriesAnalysisWidget(QWidget):
             self.l1SolverCombo.addItems(cvx.installed_solvers())
         except ImportError:
             self.l1Group.setEnabled(False)
+
+        self.dataCombo.currentTextChanged.connect(self.sig_data_changed.emit)
 
     def _getL1Parameters(self):
         lam = self.l1LambdaSpin.value()

@@ -34,7 +34,7 @@ class TSFit(object):
         iqr_factor = kwargs.get('iqr_factor', 0)
         if iqr_factor:
             iqr_window = kwargs['iqr_window']
-            result = self.fit(**kwargs['lst'])
+            result, _, _ = self.fit(**kwargs['lst'])
             residuals = pd.Series(result.resid, index=self.series.index)
             median = residuals.rolling(
                 window=iqr_window).median().fillna(method='bfill')
@@ -107,12 +107,16 @@ class TSFit(object):
              polys=1,
              periods=None,
              discontinuities=None):
-        A, parameters = self.getDesignMatrix(
-            polys=polys, periods=periods, discontinuities=discontinuities)
+        A, parameters = self.getDesignMatrix(polys=polys, periods=periods, discontinuities=discontinuities)
         model = WLS(self.series['y'], A, weights=self.series['dy'])
         model.data.xnames = parameters
         result = model.fit()
-        return result
+        _fit = result.fittedvalues
+        npar_without_discontinuouites = polys + 2 * len(periods) + 1
+        A[:, npar_without_discontinuouites:] = 0
+        continuous = np.dot(A, result.params.values)
+        
+        return result, _fit, continuous
         
         P = np.diag(1.0 / self.series['dy'] ** 2)
         AP = np.dot(A.T, P)
@@ -120,12 +124,15 @@ class TSFit(object):
         Q_xx = np.linalg.inv(N)
         W = np.dot(AP, self.series['y'])
         p = np.dot(Q_xx, W)
-        pickle.dump(p, open('p.pkl', 'wb'))
         fit = np.dot(A, p)
+        npar_without_discontinuouites = polys + 2 * periods + 1
+        A[:, npar_without_discontinuouites:] = 0
+        continuous = np.dot(A, p)
         v = fit - self.series['y']
         result = {'parameters': parameters, 'p': p}
         result['v'] = v
         result['fit'] = fit
+        result['continuous'] = continuous
         result['aic'] = self._aic(v, A.shape[1])
         sigma2 = np.dot(np.dot(v.T, P), v) / (self.nepochs - A.shape[1])
         sigma_x = np.sqrt(np.diag(Q_xx * sigma2))

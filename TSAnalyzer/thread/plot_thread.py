@@ -19,15 +19,13 @@ class TimeSeriesThread(QThread):
         self.obj = obj
 
     def renderReader(self):
+        if self.obj is None:
+            return
         self.figure.clear()
         self.figure.suptitle(self.obj.name)
         n = len(self.obj.columns)
         for i, col in enumerate(self.obj.columns):
             ax = self.figure.add_subplot(n, 1, i + 1)
-            # ax.errorbar(self.obj.df.index,
-            #             self.obj.df[col],
-            #             yerr=self.obj.df['{}_sigma'.format(col)])
-            # self.obj.df[col].plot(ax=ax, marker='.', linewidth=0.5, markersize=1)
             ax.plot(self.obj.df.index,
                     self.obj.df[col],
                     '.-',
@@ -63,10 +61,24 @@ class TimeSeriesThread(QThread):
                 ax.set_xlabel("")
         self.sig_time_series_end.emit()
 
+    def _renderContinuous(self):
+        self.figure.clear()
+        n = len(self.columns)
+        self.figure.suptitle(self.obj.name)
+        for i, col in enumerate(self.obj.columns):
+            ax = self.figure.add_subplot(n, 1, i + 1)
+            ax.plot(self.df.index, self.df[col],
+                    '.-', linewidth=0.5, markersize=2)
+            if i < n - 1:
+                ax.set_xlabel("")
+        self.sig_time_series_end.emit()
+
     def start(self):
-        if self.task == 'ts':
+        if self.task in ('ts', 'clean'):
             self.renderReader()
         if self.task == 'fit':
             self._renderFit()
         if self.task == 'residuals':
             self._renderResiduals()
+        if self.task == 'continuous':
+            self._renderContinuous()

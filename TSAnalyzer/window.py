@@ -149,7 +149,7 @@ def main():
     app = QApplication(sys.argv)
     app.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     app.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
-    qss = os.path.join(os.path.dirname(__file__), 'resources/style.qss')
+    qss = os.path.abspath(os.path.join(os.path.dirname(__file__), 'resources/style.qss'))
     with open(qss, 'r') as f:
         app.setStyleSheet(f.read())
     window = TSAnalyzerMainWindow()

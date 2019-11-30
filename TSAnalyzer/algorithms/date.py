@@ -76,7 +76,7 @@ def mjd2julday(mjd):
 
 
 def yearfraction2date(yearfraction):
-    """Convery fractional year to datetime object/list
+    """Convert fractional year to datetime object/list
 
     Args:
         yearfraction (float/list) : fractional year
@@ -89,6 +89,25 @@ def yearfraction2date(yearfraction):
     else:
         mjd = yearfraction2mjd(yearfraction)
         return mjd2date(mjd)
+
+def leap_year(y):
+    if y % 400 == 0:
+        return 366
+    if y % 100 == 0:
+        return 365
+    if y % 4 == 0:
+        return 366
+    else:
+        return 365
+
+def fyear2date(fyear):
+    """Convert fracation of year to datetime 
+    """
+    yr = int(fyear)
+    date = datetime(yr, 1, 1, 0, 0, 0, 0)
+    days = (fyear - yr) * leap_year(yr)
+    date = date + timedelta(days=days)
+    return date
 
 
 def yearfraction2mjd(yearfraction):

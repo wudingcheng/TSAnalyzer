@@ -200,7 +200,8 @@ class AnalysisController(object):
         self.analysisDock.sig_l1_clicked.connect(self.slotOnL1Clicked)
         self.analysisDock.sig_l1_batch.connect(self.slotOnBatchClicked)
         self.analysisDock.sig_data_saved.connect(self.slotOnSaveData)
-        self.analysisDock.sig_data_changed.connect(self.slotOnDataComboCurrentTextChanged)
+        # self.analysisDock.sig_data_changed.connect(self.slotOnDataComboCurrentTextChanged)
+        self.analysisDock.sig_data_changed.connect(self.slotOnDataChoosed)
 
     def slotOnRead(self):
         self.analysisDock.stack.setEnabled(True)
@@ -256,6 +257,12 @@ class AnalysisController(object):
         df = self.dataAnalysisResult.get(text, None)
         if df is not None:
             self.timeSeriesWidget.slotOnFitOrResiduals(df, self.reader.columns, task)
+
+    def slotOnDataChoosed(self, text):
+        
+        df = self.dataAnalysisResult.get(text, None)
+        if df is not None:
+            self.timeSeriesWidget.slotOnFitOrResiduals(df, self.reader.columns, text)
 
     def slotOnL1Clicked(self, parameters):
         self.l1Thread = TSL1Thread(self.analysisDock)

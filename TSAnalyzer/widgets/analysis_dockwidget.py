@@ -21,7 +21,7 @@ class AnalysisDockWidget(QDockWidget):
     sig_fit_batch = Signal(str, dict)
     sig_l1_clicked = Signal(dict)
     sig_l1_batch = Signal(str, dict)
-    sig_data_changed = Signal()
+    sig_data_changed = Signal(str)
     sig_data_saved = Signal()
 
     def __init__(self, parent=None):

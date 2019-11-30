@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import  division
+from __future__ import division
 from qtpy.QtWidgets import *
 from qtpy.QtCore import *
 from qtpy.QtGui import QTextCursor
@@ -37,7 +37,7 @@ class TSHeaderThread(QThread):
         with open(filename, 'r') as f:
             lines = f.readlines()
             number_ratios = []
-            for i, line in enumerate(lines):
+            for line in lines:
                 temp = re.findall('\d', line)
                 try:
                     number_ratios.append(
@@ -72,13 +72,15 @@ class TSHeaderThread(QThread):
                 f.write(content)
             # self.done += 1
             # self.progressBar.setValue(self.done * 100.0 / self.cout)
-            self.progressSignal.emit((i + 1) * 100.0/ files_count, filename)
+            self.progressSignal.emit((i + 1) * 100.0 / files_count, filename)
+
 
 class FileHeaderWidget(QWidget):
 
     def __init__(self, parent=None):
         super(FileHeaderWidget, self).__init__(parent=parent)
-        ui = os.path.join(os.path.dirname(__file__), "../resources/ui/header.ui")
+        ui = os.path.join(os.path.dirname(__file__),
+                          "../resources/ui/header.ui")
         self.setWindowIcon(getIcon('icon'))
         loadUi(ui, self)
         self.thread = TSHeaderThread(self)
@@ -99,17 +101,20 @@ class FileHeaderWidget(QWidget):
 
     def _click_dirButton(self):
         directory = QFileDialog.getExistingDirectory(
-            self, "Choose directory for saving new file",
-            "", QFileDialog.DontUseNativeDialog)
+            self,
+            "Choose directory for saving new file",
+            "",
+            QFileDialog.DontUseNativeDialog)
         if directory:
             self.dirEdit.setText(directory)
             self.directory = str(directory)
 
     def _click_addFilesButton(self):
         files = getopenfilenames(
-            None, "Choose Time Series Files", '',
-            'tseries (*.*)', 
-            None, 
+            None,
+            "Choose Time Series Files", '',
+            'tseries (*.*)',
+            None,
             QFileDialog.DontUseNativeDialog)[0]
         files = [i for i in files]
         items = []
@@ -161,10 +166,12 @@ class FileHeaderWidget(QWidget):
             return self._error_promopt("Columns not specified!")
         column_names = str(self.colNameEdit.text()).split()
         if len(column_indexs) != len(column_names):
-            return self._error_promopt('The numbers of column indexs and column names should be equal!')
+            return self._error_promopt(
+                'The numbers of column indexs and column names should be equal!')
         index_col = str(self.indexColEdit.text()).split()
         if len(list(set(index_col + column_names))) != len(column_names):
-            return self._error_promopt("Index columns should be subset of columns")
+            return self._error_promopt(
+                "Index columns should be subset of columns")
         return True
 
     def _click_writeButton(self):
@@ -183,19 +190,20 @@ class FileHeaderWidget(QWidget):
                 "Please select the target directory.",
                 QMessageBox.Ok)
             return
-        header = '''# time_unit: %s
-# unit: %s
-# scale: %s
-# column_names: %s
-# columns_index: %s
-# index_cols: %s
-# index_formats: %s\n''' % (str(self.timeUnitBox.currentText()),
-                            str(self.unitEdit.text()),
-                            str(self.scaleEdit.text()),
-                            str(self.colNameEdit.text()),
-                            str(self.colIndexEdit.text()),
-                            str(self.indexColEdit.text()),
-                            str(self.indexFormatsEdit.text()))
+        header = ("# time_unit: {}"
+                  "# unit: {}"
+                  "# scale: {}"
+                  "# column_names: {}"
+                  "# columns_index: {}"
+                  "# index_cols: {}"
+                  "# index_formats: {}\n").format(
+            str(self.timeUnitBox.currentText()),
+            str(self.unitEdit.text()),
+            str(self.scaleEdit.text()),
+            str(self.colNameEdit.text()),
+            str(self.colIndexEdit.text()),
+            str(self.indexColEdit.text()),
+            str(self.indexFormatsEdit.text()))
         self.consoleLabel.setVisible(True)
         files = []
         for index in range(self.filesListWidget.count()):

@@ -31,6 +31,11 @@ Email: wudingcheng14 at mails.ucas.ac.cn.
 
 ## Version Update
 
+### v2.0.2 (2019/11/30)
+
+- Support another neu format, traditionally  time of neu is calculated by `mjd = round(365.25 * (yearfraction - 1970.0) + 40587.0 + 0.1) - 0.5; date=date2mjd(mjd)`, this also support `(int(yearfraction), yearfraction - int(yearfraction)) * days_of_years)`, see `date.py` `yearfraction2mjd`, `fyear2date` for detail.
+- add `continuous` time-series back from the v1.x, the `continuous` means no discontinuities in time series and outliers.
+
 ### v2.0.1
 
 - Fix bugs for *Header Convert Tool*;

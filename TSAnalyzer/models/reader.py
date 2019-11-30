@@ -5,7 +5,7 @@ from qtpy.QtCore import QObject, Signal
 import pandas as pd
 import os
 from ..algorithms.date import (date2yearfraction, yearfraction2date,
-                               mjd2date, mjd2yearfraction)
+                               mjd2date, mjd2yearfraction, fyear2date)
 
 
 class Reader(QObject):
@@ -174,8 +174,14 @@ class Reader(QObject):
                               comment='#',
                               names=names,
                               usecols=cols)
+        self.df[self.df.columns[1:]] *= self.scale
         time_index = [yearfraction2date(i) for i in self.df.years]
+        if not (len(time_index) == len(set(time_index))):
+            time_index = [fyear2date(i) for i in self.df.years]
+        if not (len(time_index) == len(set(time_index))):
+            raise ValueError("NEU timestamp not support!")
         self.df.index = time_index
+        self.df.index.name = 'datetime'
         self.is_read = True
 
     def _readTSERIES(self, filename):

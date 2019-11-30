@@ -55,6 +55,7 @@ class TSFitThread(QThread):
             results = {}
             fit = []
             residuals = []
+            continuous = []
             log = '{} Fit:\n'.format(self.reader.filename)
             for col in self.reader.columns:
                 if '{}_sigma'.format(col) in self.reader.df.columns:
@@ -67,19 +68,21 @@ class TSFitThread(QThread):
                 tsfit = TSFit(series)
                 self.parameters['discontinuities'] = self.offsetsHandler.getSiteComponentOffsets(
                     self.reader.name, col)
-                results[col] = tsfit.fit(**self.parameters)
+                results[col], _fit, conti = tsfit.fit(**self.parameters)
                 
                 residuals.append(
                     pd.Series(results[col].resid, name=col, index=tsfit.series.index))
                 fit.append(
-                    pd.Series(results[col].fittedvalues, name=col, index=tsfit.series.index))
+                    pd.Series(_fit, name=col, index=tsfit.series.index))
+                continuous.append(pd.Series(conti, name=col, index=tsfit.series.index))
                 log += results[col].summary2(
                     title='{} {}'.format(self.reader.name, col)).as_text()
             log = log.replace('\n', '<br>')
             self.sig_log.emit(log)
             fit = pd.concat(fit, axis=1)
             residuals = pd.concat(residuals, axis=1)
-            self.sig_fit_end.emit({'fit': fit, 'residuals': residuals})
+            continuous = pd.concat(continuous, axis=1)
+            self.sig_fit_end.emit({'fit': fit, 'residuals': residuals, 'continuous': continuous})
         except Exception as ex:
             self.sig_error.emit(str(ex))
 
@@ -115,6 +118,7 @@ class TSFitBatchThread(QThread):
     def _fitWrapper(self, filename):
         results = {}
         residuals = []
+        continuous = []
         self.reader.readFile(filename)
         log = 'File: {}\n'.format(filename)
         for col in self.reader.columns:
@@ -124,29 +128,30 @@ class TSFitBatchThread(QThread):
             tsfit = TSFit(series)
             self.params['discontinuities'] = self.handler.getSiteComponentOffsets(
                 self.reader.name, col)
-            results[col] = tsfit.fit(**self.params)
-            # residuals.append(pd.Series(results[col]['v'], name=col, index=tsfit.series.index))
-            # log += tsfit.log(results[col])
-            # log += '\n'
+            results[col], _, conti = tsfit.fit(**self.params)
             residuals.append(
                 pd.Series(results[col].resid, name=col, index=tsfit.series.index))
+            
+            continuous.append(pd.Series(conti, name=col, index=tsfit.series.index))
             log = results[col].summary(
                 title='{} {}'.format(self.reader.name, col)).as_text()
         residuals = pd.concat(residuals, axis=1)
+        continuous = pd.concat(continuous, axis=1)
         with open('{}/{}.log'.format(self.logDir, self.reader.name), 'w') as f:
             f.write(log)
-        filename = '{}/{}.dat'.format(self.dataDir, self.reader.name)
+        filename = '{}/{}_res.dat'.format(self.dataDir, self.reader.name)
         self.reader.saveTODAT(residuals, filename)
-        # residuals.to_csv('{}/{}.dat'.format(self.dataDir, self.reader.name), sep=' ')
+        filename = '{}/{}_continuous.dat'.format(self.dataDir, self.reader.name)
+        self.reader.saveTODAT(continuous, filename)
 
     def run(self):
         n = len(self.files)
         for i, f in enumerate(self.files):
             self.sig_log.emit("{}".format(f))
-            try:
-                self._fitWrapper(f)
-            except Exception as ex:
-                self.sig_fitBatch_error.emit(ex)
+            # try:
+            self._fitWrapper(f)
+            # except Exception as ex:
+            #     self.sig_fitBatch_error.emit(ex)
             print((i + 1) * 100 / n)
             self.sig_fitBatch_progress.emit((i + 1) / n)
 
