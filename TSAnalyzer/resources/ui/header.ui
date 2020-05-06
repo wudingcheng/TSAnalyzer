@@ -53,7 +53,7 @@
        <item>
         <widget class="QToolButton" name="addFilesButton">
          <property name="text">
-          <string>...</string>
+          <string>Open</string>
          </property>
          <property name="shortcut">
           <string>Ctrl+O</string>
@@ -352,6 +352,20 @@
           </item>
          </layout>
         </item>
+        <item row="5" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+            <widget class="QCheckBox" name="removeOldHeader">
+              <property name="text">
+              <string>Remove old header</string>
+              </property>
+              <property name="checked">
+              <bool>true</bool>
+              </property>
+            </widget>
+          </item>
+         </layout>
+        </item>        
        </layout>
       </widget>
      </item>
@@ -380,7 +394,7 @@
        <item>
         <widget class="QToolButton" name="dirButton">
          <property name="text">
-          <string/>
+          <string>Choose</string>
          </property>
         </widget>
        </item>

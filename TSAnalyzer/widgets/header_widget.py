@@ -23,7 +23,8 @@ date_dicts = {'y-m-d': '%Y-%m-%d',
               'minute': '%M',
               'second': '%S',
               'doy': '%j',
-              'mjd': '', }
+              'mjd': '',
+              'years': '' }
 
 
 class TSHeaderThread(QThread):
@@ -53,10 +54,11 @@ class TSHeaderThread(QThread):
             except:
                 return 0
 
-    def render(self, files, directory, header):
+    def render(self, files, directory, header, removeOldHeader=True):
         self.files = files
         self.directory = directory
         self.header = header
+        self.removeOldHeader = removeOldHeader
         self.start()
 
     def run(self):
@@ -64,7 +66,10 @@ class TSHeaderThread(QThread):
         for i, filename in enumerate(self.files):
             with open(filename, 'r') as f:
                 lines = f.readlines()
-                header_line = self.get_header(filename)
+                if self.removeOldHeader:
+                    header_line = self.get_header(filename)
+                else:
+                  header_line = 0
                 content = self.header + ''.join(lines[header_line:])
             new_name = os.path.join(
                 self.directory, os.path.split(filename)[1].split('.')[0] + '.dat')
@@ -190,12 +195,12 @@ class FileHeaderWidget(QWidget):
                 "Please select the target directory.",
                 QMessageBox.Ok)
             return
-        header = ("# time_unit: {}"
-                  "# unit: {}"
-                  "# scale: {}"
-                  "# column_names: {}"
-                  "# columns_index: {}"
-                  "# index_cols: {}"
+        header = ("# time_unit: {}\n"
+                  "# unit: {}\n"
+                  "# scale: {}\n"
+                  "# column_names: {}\n"
+                  "# columns_index: {}\n"
+                  "# index_cols: {}\n"
                   "# index_formats: {}\n").format(
             str(self.timeUnitBox.currentText()),
             str(self.unitEdit.text()),
@@ -208,7 +213,7 @@ class FileHeaderWidget(QWidget):
         files = []
         for index in range(self.filesListWidget.count()):
             files.append(self.filesListWidget.item(index).text())
-        self.thread.render(files, self.directory, header)
+        self.thread.render(files, self.directory, header, self.removeOldHeader.isChecked())
 
     def sigOnWrite(self, progress, filename):
         self.progressBar.setValue(progress)
