@@ -22,6 +22,7 @@ class TimeSeriesToolBar(NavigationToolbar):
     def __init__(self, canvas, parent):
         super(TimeSeriesToolBar, self).__init__(canvas, parent, True)
         self.setWindowTitle("Time Series ToolBar")
+        self._active = None
 
     def _getDiscontinuitiesActions(self):
         actions = []

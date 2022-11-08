@@ -6,6 +6,8 @@
 dist
 build
 
+__pycache__/
+
 # IDE
 .idea
 .vscode

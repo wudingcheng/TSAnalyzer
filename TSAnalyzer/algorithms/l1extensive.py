@@ -127,7 +127,8 @@ def l1filter(t, y,
                 seasonal += temp
         errs = errs - seasonal
 
-    obj = cvx.Minimize(0.5 * cvx.sum_squares(errs) + lam * x_term + rho * w_term)
+    obj = cvx.Minimize(0.5 * cvx.sum_squares(errs) +
+                       lam * x_term + rho * w_term)
     prob = cvx.Problem(obj)
     prob.solve(solver=solver, verbose=verbose)
     if periods:
@@ -152,7 +153,8 @@ def l1wrapper(series,
               trendchange=True):
     if not (offset or trendchange):
         return []
-    x, w, s = l1filter(series['t'], series['y'], periods=periods, lam=lam, rho=rho, solver=solver)
+    x, w, s = l1filter(series['t'], series['y'],
+                       periods=periods, lam=lam, rho=rho, solver=solver)
 
     discontinuities = []
     d2x = np.abs(np.diff(x, 2))
@@ -179,14 +181,14 @@ def l1wrapper(series,
         return discontinuities
 
     tsfit = TSFit(series)
-    discontinuities = tsfit.discontinuitiesSignificanceTest(discontinuities, polys=polys, periods=periods)
-    # return discontinuities
-    # trendchanges = [i for i in discontinuities if isinstance(i, TrendChangeEvent)]
-    # offsets = [i for i in discontinuities if isinstance(i, OffsetEvent)]
-    discontinuities = tsfit.discontinutyFTest(F=threshold,
-                                              polys=polys,
-                                              periods=periods,
-                                              discontinuities=discontinuities)
+    discontinuities = tsfit.discontinuitiesSignificanceTest(
+        discontinuities, polys=polys, periods=periods)
+
+    discontinuities = tsfit.discontinutyFTest(
+        F=threshold,
+        polys=polys,
+        periods=periods,
+        discontinuities=discontinuities)
     # for discontinuity in discontinuities:
     #     temp = deepcopy(discontinuities)
     #     flag = tsfit.discontinutyFTest(discontinuity,

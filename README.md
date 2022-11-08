@@ -6,6 +6,7 @@
 - Matplotlib
 - Numpy
 - Pandas
+- statsmodels
 - cvxpy
 - cvxopt
 
@@ -27,7 +28,7 @@ For detail information and help, please refer to [DOC](doc/).
 
 For more information and support, please contact me directly.
 
-Email: wudingcheng14 at mails.ucas.ac.cn.
+Email: scholar at wudingcheng.com
 
 ## Version Update
 

@@ -70,8 +70,7 @@ class TSFitThread(QThread):
                     self.reader.name, col)
                 results[col], _fit, conti = tsfit.fit(**self.parameters)
                 
-                residuals.append(
-                    pd.Series(results[col].resid, name=col, index=tsfit.series.index))
+                residuals.append(pd.Series(tsfit.series['y'].values - _fit, name=col, index=tsfit.series.index))
                 fit.append(
                     pd.Series(_fit, name=col, index=tsfit.series.index))
                 continuous.append(pd.Series(conti, name=col, index=tsfit.series.index))

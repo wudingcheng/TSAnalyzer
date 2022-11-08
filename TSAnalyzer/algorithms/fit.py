@@ -148,28 +148,7 @@ class TSFit(object):
         return result
 
     def discontinuitiesSignificanceTest(self, discontinuities, polys=1, periods=None):
-        # while 1:
-        #     result = self._fit(polys=polys, periods=periods, discontinuities=discontinuities)
-        #     j = polys + 1 + 2 * len(periods)
-        #     psigma = result['psigma'][j:]
-        #     p = result['p'][j:]
-        #     temp = []
-        #     for i, discontinuity in enumerate(discontinuities):
-        #         npars = discontinuity.nParameters()
-        #         p_ = p[:npars]
-        #         psigma_ = psigma[:npars]
-        #         p = p[npars:]
-        #         psigma = psigma[npars:]
-        #         if np.all(np.abs(p_) > 2 * psigma_):
-        #             temp.append(discontinuity)
-        #         # else:
-        #
-        #     if temp == discontinuities:
-        #         print('test significance end', temp)
-        #         return temp
-        #
-        #     discontinuities = temp
-        # while 1:
+        
         A, params = self.getDesignMatrix(
             polys=polys, periods=periods, discontinuities=discontinuities)
         model = WLS(self.series['y'], A, weights=self.series['dy'])
@@ -191,14 +170,12 @@ class TSFit(object):
                                     discontinuities=discontinuities)
         _, chi_square, p1, _ = np.linalg.lstsq(A, self.series['y'])
 
-        ind = discontinuities.index(
-            discontinuity) + polys + 2 * len(periods) + 1
+        ind = discontinuities.index(discontinuity) + polys + 2 * len(periods) + 1
         npar = discontinuity.nParameters()
         A = np.delete(A, range(ind, ind + npar), axis=1)
         _, chi_square_2, p2, _ = np.linalg.lstsq(A, self.series['y'])
 
-        fvalue = (chi_square_2 - chi_square) * \
-            (self.nepochs - p1) / (chi_square * (p1 - p2))
+        fvalue = (chi_square_2 - chi_square) * (self.nepochs - p1) / (chi_square * (p1 - p2))
         return fvalue[0]
 
     def discontinutyFTest(self, F=200, polys=1, periods=None, discontinuities=None):
