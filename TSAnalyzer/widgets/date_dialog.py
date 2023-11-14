@@ -2,7 +2,7 @@
 # author: WU Dingcheng
 # -*- coding: utf-8 -*-
 
-from qtpy.QtCore import QDateTime
+from qtpy.QtCore import QDateTime, QDate, QTime
 from qtpy.QtWidgets import QDialog, QMessageBox
 from qtpy.uic import loadUi
 from ..algorithms.date import *
@@ -21,7 +21,7 @@ class DateDialog(QDialog):
         self.demical_year = 2000.0
         self.doy = "2000-001"
         self.date = datetime(2000, 1, 1, 12)
-        self.dateEdit.setDateTime(QDateTime(2000, 1, 1, 12, 0))
+        self.dateEdit.setDateTime(QDateTime(QDate(2000, 1, 1), QTime(12, 0)))
 
         self.conversionButton.clicked.connect(self.conversionButtonClicked)
         self.ydEdit.setInputMask("9999-999")
