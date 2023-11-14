@@ -70,7 +70,12 @@ class Reader(QObject):
             self._readMJD()
             return
         self._parser_dates = {'datetime': index}
-        self._date_parser = lambda x: pd.datetime.strptime(x, formats)
+        if self.time_unit not in col_names:
+            self._date_parser = lambda x: pd.datetime.strptime(x, formats)
+        elif 'years' in col_names:
+            self._date_parser = lambda x: fyear2date(float(x))
+        else:
+          raise Exception('Unsupported time unit')
 
     def _readMJD(self):
         cols = sorted(self.cols.keys())
@@ -155,7 +160,7 @@ class Reader(QObject):
             self.df.insert(0, self.time_unit, dys)
         for col in self.columns:
             if '{}_sigma'.format(col) not in self.df.columns:
-                self.df['{}_sigma'.format(col)] = 1
+                self.df['{}_sigma'.format(col)] = 1.0
         self.is_read = True
 
     def _readNEU(self, filename):
