@@ -190,12 +190,12 @@ class FileHeaderWidget(QWidget):
                 "Please select the target directory.",
                 QMessageBox.Ok)
             return
-        header = ("# time_unit: {}"
-                  "# unit: {}"
-                  "# scale: {}"
-                  "# column_names: {}"
-                  "# columns_index: {}"
-                  "# index_cols: {}"
+        header = ("# time_unit: {}\n"
+                  "# unit: {}\n"
+                  "# scale: {}\n"
+                  "# column_names: {}\n"
+                  "# columns_index: {}\n"
+                  "# index_cols: {}\n"
                   "# index_formats: {}\n").format(
             str(self.timeUnitBox.currentText()),
             str(self.unitEdit.text()),

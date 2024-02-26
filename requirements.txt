@@ -1,0 +1,8 @@
+cvxpy==1.4.2
+matplotlib==3.7.2
+numpy==1.24.3
+pandas==2.0.3
+QtPy==2.2.0
+scipy==1.11.1
+setuptools==68.0.0
+statsmodels==0.14.0

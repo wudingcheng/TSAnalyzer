@@ -97,7 +97,7 @@ class FileDockWidget(QDockWidget):
         files = getopenfilenames(self,
                                  _("Choose Time Series Files"),
                                  '',
-                                 _('tseries (*.dat *.neu *.tseries *.pos)'),
+                                 _('tseries (*.dat *.neu *.tseries *.pos *.tenv *tenv3)'),
                                  None,
                                  QFileDialog.DontUseNativeDialog)[0]
         self.addFiles(files)
