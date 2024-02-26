@@ -1,5 +1,7 @@
 # TSAnalyzer 2.0.1
 
+Please do not hesitate to contact me at nicg at wudingcheng dot com if you have any questions or concerns.
+
 ## Requirements
 
 - qtpy
