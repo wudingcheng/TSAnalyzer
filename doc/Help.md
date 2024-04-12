@@ -95,11 +95,8 @@ $$
 
 $$
 y(t_i) = a + \sum_{i=1}^{n}b_i(t_i-t_0)^i + \sum_{i=1}^{n_p}\left( c_i \sin (2\pi t_i / p_i) + d_i \cos(2 \pi t_i / p_i) \right) + \\ \sum_{i=1}^{n_g}\left(g_i H(t_i - T_{g_j})\right) + \sum_{i=1}^{n_k}\left( h_i(t_i - T_{k_i}) H(t_i -T_{k_i}) \right)+ \\
-\sum_{i=1}^{n_l}\left(C_{l_i} + l_i H\ln (1 + \frac{t_i - t_{eq}}{\tau})\right) + \sum_{i=1}^{n_e}\left(C_{e_i} + e_i H (1-e^{(-1(t-t_{eq_i}/\tau))})\right) + v_i
+\sum_{i=1}^{n_l}H\left(C_{l_i} + l_i \ln (1 + \frac{t_i - t_{eq}}{\tau})\right) + \sum_{i=1}^{n_e}H\left(C_{e_i} + e_i  (1-e^{(-1(t-t_{eq_i}/\tau))})\right) + v_i
 $$
-
-
-`* if the math equations cannot be rendered, please refer to the pdf file`
 
 In the equation, $b_i$ is polynomials, if $i=1$ for $b_i$, it is the linear trend, $c_i$ and $d_i$ are harmonic components, the $H$ is a step function and $g_i$ can be used to explain the sudden change event caused the equipments or co-seismic, $C_{l_{i}}$ and $C_{e_{i}}$ terms are stand for logarithmic or exponential function to be fit after an Earthquake. These terms are the accumulated post-seismic motion, C is the co-seismic offset, and τ is the decay time.
 
