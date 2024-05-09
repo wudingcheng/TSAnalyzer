@@ -29,7 +29,7 @@ def _(text, disambiguation=None, context='TSAnalyzerMainWindow'):
 
 class TSAnalyzerMainWindow(QMainWindow):
     def __init__(self):
-        super(QMainWindow, self).__init__()
+        super(TSAnalyzerMainWindow, self).__init__()
         self.setWindowTitle("TSAnalyzer")
         self.setWindowIcon(getIcon('icon'))
         self.__initWidgets()
@@ -99,9 +99,9 @@ class TSAnalyzerMainWindow(QMainWindow):
         self.toolMenu = self.menuBar.addMenu(_("&Tools"))
         self.aboutMenu = self.menuBar.addMenu(_("&About"))
 
-        self.fileMenu.addActions(self.fileDockWidget.actions.values())
+        self.fileMenu.addActions(list(self.fileDockWidget.actions.values()))
         self.fileMenu.addSeparator()
-        self.fileMenu.addActions(self.discontinuityDock.actions.values())
+        self.fileMenu.addActions(list(self.discontinuityDock.actions.values()))
 
         exitAction = QAction(_("Close"), self.fileMenu)
         self.fileMenu.addSeparator()
@@ -146,9 +146,10 @@ class TSAnalyzerMainWindow(QMainWindow):
 
 def main():
     import os
+    QApplication.AA_EnableHighDpiScaling = True
+    QApplication.AA_UseHighDpiPixmaps = True
+    QCoreApplication.setAttribute(Qt.AA_ShareOpenGLContexts)    
     app = QApplication(sys.argv)
-    app.setAttribute(Qt.AA_EnableHighDpiScaling, True)
-    app.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
     qss = os.path.abspath(os.path.join(os.path.dirname(__file__), 'resources/style.qss'))
     with open(qss, 'r') as f:
         app.setStyleSheet(f.read())
