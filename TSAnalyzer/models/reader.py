@@ -87,7 +87,8 @@ class Reader(QObject):
             self._readMJD()
             return
         self._parser_dates = {"datetime": index}
-        self._date_parser = lambda x: pd.datetime.strptime(x, formats)
+        # self._date_parser = lambda x: pd.datetime.strptime(x, formats)
+        self._date_parser = formats
 
     def _readMJD(self):
         cols = sorted(self.cols.keys())
@@ -132,7 +133,8 @@ class Reader(QObject):
             usecols=cols,
             index_col="datetime",
             parse_dates=self._parser_dates,
-            date_parser=self._date_parser,
+            # date_parser=self._date_parser,
+            date_format=self._date_parser,
             skiprows=self.skiprows,
         )
 
@@ -162,7 +164,8 @@ class Reader(QObject):
             19: "east_sigma",
             20: "up_sigma",
         }
-        self._date_parser = lambda x: pd.datetime.strptime(x, "%Y%m%d %H%M%S")
+        # self._date_parser = lambda x: pd.datetime.strptime(x, "%Y%m%d %H%M%S")
+        self._date_parser = "%Y%m%d %H%M%S"
         self._parser_dates = {"datetime": ["ymd", "hms"]}
         self._readFile(filename)
         self.df = self.df.apply(lambda i: i * self.scale)
@@ -245,7 +248,8 @@ class Reader(QObject):
         self._parser_dates = {
             "datetime": ["year", "month", "day", "hour", "minute", "seconds"]
         }
-        self._date_parser = lambda x: pd.datetime.strptime(x, "%Y %m %d %H %M %S")
+        # self._date_parser = lambda x: pd.datetime.strptime(x, "%Y %m %d %H %M %S")
+        self._date_parser = "%Y %m %d %H %M %S"
         self._readFile(filename)
         self.df.iloc[:, 1:] = self.df.iloc[:, 1:].apply(lambda i: i * self.scale)
 
