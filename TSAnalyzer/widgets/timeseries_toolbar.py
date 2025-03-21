@@ -8,6 +8,7 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 
 from ..models.offsets import DISCONTINUITIES, DiscontinuityEvent
 from ..utils import makeAction
+import matplotlib
 
 
 def _(text, disambiguation=None, context='TimeSeriesToolBar'):
@@ -23,6 +24,11 @@ class TimeSeriesToolBar(NavigationToolbar):
         super(TimeSeriesToolBar, self).__init__(canvas, parent, True)
         self.setWindowTitle("Time Series ToolBar")
         self._active = None
+        
+        # https://matplotlib.org/stable/api/prev_api_changes/api_changes_3.3.0.html#navigationtoolbar2-init-toolbar
+        if matplotlib.__version__ >= '3.30':
+            self.clear()
+            self._init_toolbar()
 
     def _getDiscontinuitiesActions(self):
         actions = []

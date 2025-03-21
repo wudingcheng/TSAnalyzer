@@ -11,3 +11,6 @@ __pycache__/
 # IDE
 .idea
 .vscode
+
+# notebooks
+notebooks

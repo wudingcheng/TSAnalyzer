@@ -96,7 +96,7 @@ def l1filter(t, y,
                 seasonal += temp
         errs = errs - seasonal
     obj = cvx.Minimize(0.5 * cvx.sum_squares(errs) +
-                       lam * cvx.norm(D * x, 1) +
+                       lam * cvx.norm(D @ x, 1) +
                        rho * cvx.tv(w))
     prob = cvx.Problem(obj)
     prob.solve(solver=solver, verbose=verbose)

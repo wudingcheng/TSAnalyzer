@@ -173,7 +173,7 @@ class TSFit(object):
         ind = discontinuities.index(discontinuity) + polys + 2 * len(periods) + 1
         npar = discontinuity.nParameters()
         A = np.delete(A, range(ind, ind + npar), axis=1)
-        _, chi_square_2, p2, _ = np.linalg.lstsq(A, self.series['y'])
+        _, chi_square_2, p2, _ = np.linalg.lstsq(A, self.series['y'], rcond=None)
 
         fvalue = (chi_square_2 - chi_square) * (self.nepochs - p1) / (chi_square * (p1 - p2))
         return fvalue[0]
