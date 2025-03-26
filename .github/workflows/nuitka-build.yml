@@ -17,9 +17,11 @@ jobs:
           - os: windows-latest
             output_name: app.exe
             icon: TSAnalyzer/resources/images/icon.ico
+            icon_option: --windows-icon-from-ico
           - os: macos-latest
             output_name: app
             icon: TSAnalyzer/resources/images/icon.png
+            icon_option: --macos-app-icon
 
     runs-on: ${{ matrix.os }}
 
@@ -44,7 +46,7 @@ jobs:
         
     - name: Build with Nuitka
       run: |
-        python -m nuitka --standalone --follow-imports --include-data-dir=./TSAnalyzer/=TSAnalyzer --windows-disable-console --macos-create-app-bundle --macos-app-icon=${{ matrix.icon }} main.py --output-dir=dist
+        python -m nuitka --standalone --follow-imports --include-data-dir=./TSAnalyzer/=TSAnalyzer --windows-disable-console --macos-create-app-bundle ${{ matrix.icon_option }}=${{ matrix.icon }} main.py --output-dir=dist
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
