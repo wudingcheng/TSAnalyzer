@@ -45,9 +45,9 @@ jobs:
     - name: Build with Nuitka
       run: |
         if [ "${{ matrix.os }}" == "windows-latest" ]; then
-          python -m nuitka --standalone --follow-imports --include-data-dir=./TSAnalyzer/=TSAnalyzer --windows-disable-console --windows-icon-from-ico=${{ matrix.icon }} main.py --output-dir=dist
+          python -m nuitka --standalone --follow-imports --include-data-dir=./TSAnalyzer/=TSAnalyzer --windows-disable-console --enable-plugins=pyqt5 --windows-icon-from-ico=${{ matrix.icon }} main.py --output-dir=dist
         else
-          python -m nuitka --standalone --follow-imports --include-data-dir=./TSAnalyzer/=TSAnalyzer --macos-create-app-bundle --macos-app-icon=${{ matrix.icon }} main.py --output-dir=dist
+          python -m nuitka --standalone --follow-imports --include-data-dir=./TSAnalyzer/=TSAnalyzer --macos-create-app-bundle --enable-plugins=pyqt5 --macos-app-icon=${{ matrix.icon }} main.py --output-dir=dist
         fi
 
     - name: Upload artifacts
