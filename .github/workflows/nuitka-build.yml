@@ -1,0 +1,66 @@
+name: Nuitka Build
+
+on:
+  push:
+    branches: [ main, feature/nuitka-build ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main, feature/nuitka-build ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+        include:
+          - os: windows-latest
+            output_name: app.exe
+          - os: macos-latest
+            output_name: app
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install nuitka
+
+    - name: Install macOS dependencies
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew install ccache
+        
+    - name: Build with Nuitka
+      run: |
+        python -m nuitka --standalone --follow-imports main.py --output-dir=dist
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ runner.os }}-build
+        path: |
+          dist/main.dist/**
+          dist/main.app/**
+
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/v')
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        draft: false
+        prerelease: false
+        files: |
+          dist/main.dist/**
+          dist/main.app/**
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
