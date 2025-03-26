@@ -37,11 +37,15 @@ jobs:
         pip install -r requirements.txt
         pip install nuitka
         pip install imageio
+        pip install PyQt5
+        pip install PyQt5-Qt5
+        pip install PyQt5-sip
 
     - name: Install macOS dependencies
       if: matrix.os == 'macos-latest'
       run: |
         brew install ccache
+        brew install qt@5
         
     - name: Build with Nuitka
       run: |
